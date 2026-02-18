@@ -1,0 +1,15 @@
+# FastAPI and server dependencies
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+pydantic==2.9.2
+
+# Testing
+pytest==8.3.3
+httpx==0.27.2
+
+# Common dependencies that candidates might use
+# Feel free to add your own preferred libraries for:
+# - Vector stores (e.g., faiss-cpu, chromadb, pinecone-client)
+# - LLM providers (e.g., openai, anthropic, langchain)
+# - Embeddings (e.g., sentence-transformers, openai)
+# - Document processing (e.g., langchain-text-splitters)
