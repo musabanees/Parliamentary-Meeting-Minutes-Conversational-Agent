@@ -6,10 +6,23 @@ pydantic==2.9.2
 # Testing
 pytest==8.3.3
 httpx==0.27.2
+pytest-asyncio
 
-# Common dependencies that candidates might use
-# Feel free to add your own preferred libraries for:
-# - Vector stores (e.g., faiss-cpu, chromadb, pinecone-client)
-# - LLM providers (e.g., openai, anthropic, langchain)
-# - Embeddings (e.g., sentence-transformers, openai)
-# - Document processing (e.g., langchain-text-splitters)
+# LlamaIndex core
+llama-index-core
+
+# LLM provider - Gemini
+llama-index-llms-gemini
+llama-index-llms-google-genai
+google-generativeai
+
+# Embeddings - HuggingFace
+llama-index-embeddings-huggingface
+
+# Vector store - Qdrant
+llama-index-vector-stores-qdrant
+qdrant-client
+
+# Utilities
+python-dotenv
+pyyaml

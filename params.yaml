@@ -1,0 +1,3 @@
+EMBEDDING_MODEL: "intfloat/e5-small-v2"
+COLLECTION_NAME: "parliamentary_meeting_notes"
+GENERATION_MODEL: "gemini-2.5-flash"

@@ -9,6 +9,7 @@ develop-eggs/
 dist/
 downloads/
 eggs/
+.pytest_cache
 .eggs/
 lib/
 lib64/
@@ -48,3 +49,6 @@ vectorstore/
 
 # Logs
 *.log
+
+# helping docs
+cursor/
