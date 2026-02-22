@@ -8,6 +8,7 @@ import os
 import logging
 from pathlib import Path
 from typing import List, Dict, Any, Optional
+from datetime import datetime
 
 import yaml
 from dotenv import load_dotenv
@@ -22,8 +23,9 @@ from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.extractors import KeywordExtractor
 from llama_index.core.ingestion import IngestionPipeline
 from llama_index.core.memory import ChatMemoryBuffer
-from llama_index.core.llms import ChatMessage, MessageRole
-from llama_index.llms.google_genai import GoogleGenAI
+from llama_index.core.callbacks import CallbackManager, LlamaDebugHandler
+from llama_index.llms.gemini import Gemini
+from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 import google.genai.types as types
@@ -33,10 +35,28 @@ from parliament_agent.vector_store.qdrant_client import QdrantVectorStoreManager
 logger = logging.getLogger(__name__)
 
 load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PARAMS_PATH = BASE_DIR / "params.yaml"
 DATA_DIR = BASE_DIR / "data"
+LOGS_DIR = BASE_DIR / "logs"
+
+# Configure logging to save to logs folder
+LOGS_DIR.mkdir(exist_ok=True)
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+log_file = LOGS_DIR / f"agent_{timestamp}.log"
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file),
+        logging.StreamHandler()
+    ],
+    force=True
+)
+logger.info(f"Agent logging to {log_file}")
 
 
 def _load_params() -> dict:
@@ -55,26 +75,17 @@ class ParliamentAgent:
     def __init__(self):
         params = _load_params()
 
-        google_api_key = os.getenv("GOOGLE_API_KEY")
-        if not google_api_key:
-            raise ValueError("GOOGLE_API_KEY not set in environment")
 
-        config = types.GenerateContentConfig(
-            thinking_config=types.ThinkingConfig(thinking_budget=0),
-            temperature=0.4
-        )
+        generation_model = params['GENERATION_MODEL']
 
-        Settings.llm = GoogleGenAI(
-            model=f"models/{params['GENERATION_MODEL']}",
-            api_key=google_api_key,
-            generation_config=config,
-        )
-
-        self.ingest_llm = GoogleGenAI(
-            model="models/gemini-2.5-flash-lite",
-            api_key=google_api_key,
-            generation_config=config,
-        )
+        # Initialize LlamaDebugHandler for tracking timing
+        llama_debug = LlamaDebugHandler(print_trace_on_end=True)
+        Settings.callback_manager = CallbackManager([llama_debug])
+        Settings.llm = OpenAI(
+            model=generation_model,
+            api_key=OPENAI_API_KEY,
+            temperature=0.3,
+            )
 
         Settings.embed_model = HuggingFaceEmbedding(
             model_name=params["EMBEDDING_MODEL"],
@@ -102,6 +113,7 @@ class ParliamentAgent:
             memory=self._memory,
             llm=Settings.llm,
             verbose=True,
+            similarity_top_k=8,
             system_prompt=(
                 "You are a helpful assistant that answers questions about "
                 "Scottish parliamentary meeting minutes. You MUST answer "
@@ -130,7 +142,7 @@ class ParliamentAgent:
         pipeline = IngestionPipeline(
             transformations=[
                 Settings.text_splitter,
-                KeywordExtractor(keywords=10, llm=self.ingest_llm, num_workers=2),
+                KeywordExtractor(keywords=10, llm=Settings.llm, num_workers=2),
                 Settings.embed_model,
             ],
             vector_store=self._qdrant_manager.vector_store,
@@ -144,69 +156,59 @@ class ParliamentAgent:
         )
         return index
 
-    async def chat(
-        self, query: str, history: Optional[List[Dict[str, str]]] = None
-    ) -> Dict[str, Any]:
-        """
-        Process a user query and return a grounded response.
+    async def chat(self, query: str) -> Dict[str, Any]:
 
-        Uses retrieval + LLM to answer questions about parliamentary minutes.
-        """
-        # Build context from history
-        context_messages = []
-        if history:
-            for msg in history:
-                role = (
-                    MessageRole.USER
-                    if msg.get("role") == "user"
-                    else MessageRole.ASSISTANT
-                )
-                context_messages.append(ChatMessage(role=role, content=msg["content"]))
-        
-        # Retrieve relevant documents
-        retriever = self._index.as_retriever(similarity_top_k=5)
-        nodes = await retriever.aretrieve(query)
-        
-        # Build context from retrieved nodes
-        context_str = "\n\n".join([
-            f"Document {i+1}:\n{node.get_content()}"
-            for i, node in enumerate(nodes)
-        ])
-        
-        # Build prompt with history and context
-        system_prompt = (
-            "You are a helpful assistant that answers questions about "
-            "Scottish parliamentary meeting minutes. You MUST answer "
-            "based ONLY on the retrieved context. If the information is "
-            "not available in the context, say 'I could not find that "
-            "information in the parliamentary documents.' "
-            "Always be factual and cite which speaker or section the "
-            "information comes from when possible."
-        )
-        
-        # Add history and current query
-        messages = [ChatMessage(role=MessageRole.SYSTEM, content=system_prompt)]
-        messages.extend(context_messages)
-        messages.append(ChatMessage(
-            role=MessageRole.USER,
-            content=f"Context:\n{context_str}\n\nQuestion: {query}"
-        ))
-        
-        # Get response from LLM
-        response = await Settings.llm.achat(messages)
-        
-        # Extract sources
+        # 1. Display/Log current Memory state before the query
+        current_memory = self._memory.get_all()
+        if current_memory:
+            logger.info(f"Total messages in memory: {len(current_memory)}")
+            for idx, msg in enumerate(current_memory, 1):
+                content = str(msg.content) if msg.content else ""
+                logger.info(f"  [{idx}] {msg.role.value.upper()}: {content[:150]}...")
+        else:
+            logger.info("Memory is empty (first turn in conversation)")
+
+        logger.info(f"--- [NEW USER QUERY] ---")
+        logger.info(f"Original Query: {query}")
+
+        response = await self._chat_engine.achat(query)
+
+        logger.info("--- [QUERY REWRITING COMPLETE] ---")
+        if not current_memory:
+            logger.info("Note: First query in conversation - likely used as-is")
+        else:
+            logger.info("Note: Query was contextualized based on conversation history")
+
+        # LlamaIndex can expose sources via response.source_nodes
+        logger.info("--- [RETRIEVAL SCORES] ---")
         sources = []
-        for node in nodes:
-            source_info = node.metadata.get("file_name", "unknown")
-            keywords = node.metadata.get("excerpt_keywords", "")
-            if keywords:
-                source_info = f"{source_info} (Keywords: {keywords})"
-            sources.append(source_info)
+        content_list = []
+        score_list = []
+        if hasattr(response, "source_nodes") and response.source_nodes:
+            logger.info(f"Retrieved {len(response.source_nodes)} relevant chunks:")
+            for idx, n in enumerate(response.source_nodes, 1):
+                score = n.get_score() if hasattr(n, 'get_score') else 0.0
+                content = n.get_content() if hasattr(n, 'get_content') else str(n.node.get_content())
+                fn = n.metadata.get("file_name", "unknown") if hasattr(n, 'metadata') else n.node.metadata.get("file_name", "unknown")
+                kw = n.metadata.get("excerpt_keywords", "") if hasattr(n, 'metadata') else n.node.metadata.get("excerpt_keywords", "")
 
-        return {"answer": str(response.message.content), "sources": sources}
+                sources.append(f"{fn} (Keywords: {kw})" if kw else fn)
+                content_list.append(content)
+                score_list.append(score)
+                # logger.info(f"  Score: {score:.4f} | Content: {content[:150]}...")
+        else:
+            logger.info("No source nodes retrieved")
 
-    def _retrieve(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+        updated_memory = self._memory.get_all()
+        logger.info(f"Memory now contains {len(updated_memory)} messages")
+
+        # return {"answer": str(response), "sources": list(set(sources)), "content": content}
+        return {"answer": str(response),
+                "content": content_list,
+                "scores": score_list}
+
+
+    def _retrieve(self, query: str, top_k: int = 8) -> List[Dict[str, Any]]:
         """Retrieve relevant document chunks for a query."""
         retriever = self._index.as_retriever(similarity_top_k=top_k)
         nodes = retriever.retrieve(query)

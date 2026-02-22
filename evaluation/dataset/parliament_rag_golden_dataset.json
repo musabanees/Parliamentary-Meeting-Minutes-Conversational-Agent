@@ -1,0 +1,440 @@
+[
+  {
+    "id": "SP_Q002",
+    "query": "In the Oct 8, 2024 evidence session on the National Performance Framework (NPF), what two headline changes did the Government propose for the NPF (outcomes and purpose), and what was said about why economic growth was not listed as a national outcome?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "The evidence describes two headline changes: increasing the number of national outcomes from 11 to 13, and updating the overarching purpose to 'improve the wellbeing of people living in Scotland now and in the future'. It also states that economic growth was omitted because it is viewed as a means to an end rather than an end in itself, and should be assessed by how it contributes to wellbeing outcomes.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[08_10_24] \"We are going up from 11 to 13 outcomes\"",
+      "[08_10_24] \"the overarching purpose of the national performance framework... 'To improve the wellbeing of people living in Scotland now and in the future.'\"",
+      "[08_10_24] \"Economic growth is a means to an end, but it is not a national outcome... it should be assessed by how far it helps us to deliver the national outcomes.\""
+    ]
+  },
+  {
+    "id": "SP_Q003",
+    "query": "In the Jan 7, 2025 budget evidence session, what did the Auditor General say about the need for investment to enable public service reform, and how did he illustrate the scale of the 'change fund' compared to the overall budget?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "He argued that public service reform needs investment, and expressed concern that the term 'reform' is often used without detailed underpinning (what it means for organisations, mandates, and expectations). He noted that a public sector reform board and a £30 million change fund were being discussed, and highlighted that £30 million is only 0.05% of the overall budget, implying limited scale relative to the challenge.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[07_01_25] \"Public service reform will require investment to deliver the necessary change.\"",
+      "[07_01_25] \"too often the word 'reform' is uttered without any underpinning of what it means...\"",
+      "[07_01_25] \"a change fund of £30 million, which accounts for 0.05 per cent of the overall budget.\""
+    ]
+  },
+  {
+    "id": "SP_Q004",
+    "query": "In the Sept 10, 2024 evidence session, what is a 'mandate letter' (as described by Audit Scotland’s Richard Robinson) and what problem was it meant to solve in budget scrutiny?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "Robinson described a mandate letter as something set out during the emergency budget statement that allowed each Scottish Government spending area to state how its spending matched the Government’s priorities. He argued it helps people understand how changes across different portfolios work together—important because priorities like child poverty, the economy, and the climate emergency are cross-government in nature.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[10_09_24] \"A mandate letter was set out during the emergency budget statement last year. It allowed each Scottish Government spending area to state how its spending would match against the Government’s priorities.\"",
+      "[10_09_24] \"it allows people across Government to understand how different things are working together... their cross-Government nature.\""
+    ]
+  },
+  {
+    "id": "SP_Q005",
+    "query": "From the June 26, 2024 EU funds statement, what were the key dates mentioned for the final claims and reimbursements (project completion, July/October claims, and the year of final reimbursement payments)?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "The statement said the projects under discussion completed delivery by December 2023. It said substantial reimbursement claims would be submitted to the European Commission in July 2024 and a final one in October 2024, and that final reimbursement payments from the European Commission would not be until 2025.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[26_06_24] \"The projects... completed their delivery by December 2023.\"",
+      "[26_06_24] \"We will submit substantial reimbursement claims... in July—next month—and a final one will be submitted in October this year.\"",
+      "[26_06_24] \"The date of the final reimbursement payments... will not be until 2025.\""
+    ]
+  },
+  {
+    "id": "SP_Q006",
+    "query": "Across the Sept 10, 2024 and Jan 7, 2025 committee sessions, what was the shared concern about medium-term planning documents (e.g., the MTFS), and what did witnesses say was missing from the current forward projections?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "Both sessions emphasised that longer-term clarity was insufficient without the supporting medium-term publications. In January 2025, Stephen Boyle said forward projections in the budget were not accompanied by the scenarios expected from a medium-term financial strategy. In September 2024, witnesses discussed the value of multi-year planning/spending reviews and noted that spending reviews have been erratic in recent years, reinforcing the concern that short-term budgeting undermines medium-term planning.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[07_01_25] \"forward projections are set out in the budget, [but] those are not accompanied by the scenarios that you would expect from a medium-term financial strategy.\"",
+      "[10_09_24] \"When Gordon Brown set up the spending review system... multiyear planning... was important. Since the global financial crisis, spending reviews have come along rather erratically for short periods of time.\""
+    ]
+  },
+  {
+    "id": "SP_Q007",
+    "query": "How did Audit Scotland link cross-portfolio priorities like child poverty to the need for mandate-letter style budgeting (Sept 10, 2024), and how does that connect to Kate Forbes’s description of the NPF as a national framework intended to outlast political cycles (Oct 8, 2024)?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "Audit Scotland argued that priorities such as eradicating child poverty depend on multiple levers across government and therefore require a clear articulation of how services and spending across portfolios work together—something mandate letters helped to show during the emergency budget review. Forbes framed the NPF as a national framework that can break short-term political cycles and silos, and described it as visible in the civil service and capable of outlasting political cycles, which aligns with using a shared outcomes framework to coordinate cross-portfolio priorities over time.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[10_09_24] \"activities to eradicate child poverty... rely upon... many other factors... a clear articulation of how services and spending will work together will be required.\"",
+      "[10_09_24] \"it would be useful to see that type of [mandate letter] replicated for budgets... [because of] their cross-Government nature.\"",
+      "[08_10_24] \"the national performance framework outlasts political cycles... breaking the short-term cycle... and breaking down the silos.\""
+    ]
+  },
+  {
+    "id": "SP_Q008",
+    "query": "Combine the Oct 8, 2024 NPF session and the Sept 10, 2024 public finance session: what was said about economic growth (as a priority/outcome) and what was said about the need to think about how Scotland’s tax system should look in 10 years’ time?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "Forbes argued that economic growth is important but should be treated as a means to an end, assessed by how it delivers national outcomes, and therefore not listed as a national outcome itself. In September 2024, Professor Heald warned that Scotland is in a weak position relative to the UK Government because the UK can change tax policy at any time, and said the Parliament needs to think clearly about what it wants the Scottish tax system to look like in 10 years because improving it will take time.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[08_10_24] \"Economic growth is a means to an end, but it is not a national outcome... assessed by how far it helps us to deliver the national outcomes.\"",
+      "[10_09_24] \"the Parliament... can set Scottish income tax only before the beginning of the tax year. It is important that the Parliament thinks clearly about what it wants the Scottish tax system to look like in 10 years’ time.\""
+    ]
+  },
+  {
+    "id": "SP_Q009",
+    "query": "Using evidence from Oct 8, 2024 (NPF) and Sept 10, 2024 (public finances): what challenge was raised about using the NPF to make day-to-day capital choices, and what did Audit Scotland say it needs from Government to scrutinise capital prioritisation?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "In October 2024, a question highlighted that the NPF can be general and that outcomes may clash, raising doubt about whether it helps with concrete choices when capital is limited (e.g., between roads and houses). In September 2024, Audit Scotland said there needs to be greater transparency around capital expenditure and prioritisation, because decisions will materially affect ambitions like growing the economy, improving public services, and tackling climate change.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[08_10_24] \"Does the national performance framework help us in making day-to-day decisions?... If we have a limited capital budget... choose between roads and houses... does the national performance framework help us...?\"",
+      "[10_09_24] \"there will need to be more transparency around capital expenditure... [and] how those prioritisation decisions are made.\""
+    ]
+  },
+  {
+    "id": "SP_Q010",
+    "query": "Connect the June 26, 2024 EU funds statement and the Sept 10, 2024 evidence about multi-year spending reviews: what do these sessions suggest about the risks of hard deadlines and short planning horizons for long-term projects?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "The EU funds statement stressed a definitive end point and hard deadlines (July and October claims in 2024; final payments in 2025; a final deadline late 2025), and contrasted that with past seven-year cycles that enabled long-term projects and predictable future cycles. The September 2024 evidence highlighted that spending reviews have become erratic and short-term since the financial crisis. Together, they underscore that hard deadlines and short planning horizons make it harder to plan and deliver long-term projects sustainably.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[26_06_24] \"the seven-year structural fund... enabled truly long-term... projects... The difference here is that there is a definitive end point\"",
+      "[26_06_24] \"deadlines of July and October... The final deadline is late 2025... final outturn figures... in 2025\"",
+      "[10_09_24] \"spending reviews have come along rather erratically for short periods of time.\""
+    ]
+  },
+  {
+    "id": "SP_Q011",
+    "query": "Across June 26, 2024 (EU funds) and Jan 7, 2025 (budget evidence), what were the two different transparency issues being discussed: (1) the limits of giving 'snapshot' figures and (2) the limits of forward projections without scenarios?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "In June 2024, Forbes resisted giving definitive figures mid-process, arguing that estimates before the reimbursement deadline are only snapshots and that final outturn figures would only be known in 2025. In January 2025, Stephen Boyle argued that while forward projections exist, they lack the scenario analysis expected in a medium-term financial strategy, limiting clarity for scrutiny.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[26_06_24] \"I do not intend to mislead Parliament by giving figures that are only a snapshot in time... we will not know the final outturn figures until 2025.\"",
+      "[07_01_25] \"forward projections are set out in the budget... [but] not accompanied by the scenarios that you would expect from a medium-term financial strategy.\""
+    ]
+  },
+  {
+    "id": "SP_Q012",
+    "query": "How do the June 26, 2024 and Oct 8, 2024 sessions together describe what it means for a framework to be 'national' (not just governmental), and how does that connect to accountability beyond government (e.g., businesses or partners)?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "In June 2024, the discussion highlighted partner organisations delivering projects and the Government reclaiming costs from the European Commission, implying shared delivery responsibilities and strict eligibility criteria. In October 2024, Forbes and members stressed that the NPF should be adopted across Scotland (society and economy), with Government taking a visible leadership role; she gave an example of holding a big energy company to account, which requires Government to demonstrate its own performance against the framework.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[26_06_24] \"Projects are then set up by partner organisations... third sector... local government... NatureScot.\"",
+      "[08_10_24] \"The Government expects everybody—the whole of society and the whole economy, including business... to embrace the national performance framework... we need to have a visible leadership role\"",
+      "[08_10_24] \"If we are holding that [big energy] company to account... we need to be able to point pretty quickly to the ways in which we are doing it.\""
+    ]
+  },
+  {
+    "id": "SP_Q013",
+    "query": "From Sept 10, 2024 (public finances) and Jan 7, 2025 (budget evidence): what were the concerns about reform being under-specified, and what did witnesses want to see instead (in terms of numbers, timescales, or mandates)?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "In January 2025, Stephen Boyle said 'reform' is often used without underpinning detail, including what is required of organisations and what mandates they have to deliver change; he wanted a clear programme of reform with numbers and timescales to support scrutiny and delivery. In September 2024, witnesses similarly stressed the need for clearer medium-term planning and articulation of how spending changes across portfolios work together over time.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[07_01_25] \"too often the word 'reform' is uttered without any underpinning... what is required... what mandate they have\"",
+      "[07_01_25] \"see a clear programme of reform, with numbers and timescales to support scrutiny and delivery.\"",
+      "[10_09_24] \"the priorities... require a shared endeavour over a number of years... important... to be clear about how the sustained effort will develop over the medium-term plans.\""
+    ]
+  },
+  {
+    "id": "SP_Q014",
+    "query": "Using Sept 10, 2024 evidence on climate transition risks and Oct 8, 2024 evidence on the NPF’s climate-related outcomes and trade-offs, what did witnesses say about balancing urgency with avoiding poorly designed policies?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "In September 2024, the committee referenced Scottish Fiscal Commission warnings that delaying action increases the eventual cost of mitigation, but Professor Bell cautioned that while moving quickly makes sense, policymakers should avoid 'wrong turnings' and poorly thought-through schemes that could lose public confidence (for example, EV range anxiety). In October 2024, members discussed adding outcomes (including climate-related ones) while also noting that outcomes can clash and that limited capital budgets force difficult trade-offs (e.g., roads versus houses). Together, these points emphasise urgency with disciplined policy design and transparent prioritisation.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[10_09_24] \"the longer we delay taking action on the issue, the more expensive it will be to mitigate it.\"",
+      "[10_09_24] \"moving quickly on the issue makes some sense, but we do not want to move wrongly... Schemes that are not fully thought through...\"",
+      "[08_10_24] \"We are going up from 11 to 13 outcomes... there can be clashes between different outcomes.\"",
+      "[08_10_24] \"If we have a limited capital budget... choose between roads and houses... does the national performance framework help us to make that kind of decision?\""
+    ]
+  },
+  {
+    "id": "SP_Q015",
+    "query": "Link the Jan 7, 2025 discussion about data interoperability/open data and the Sept 10, 2024 discussion about information needed for reform: what practical data-related actions were described that could improve scrutiny and reduce repeated 'FOI-style' friction?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "In January 2025, witnesses discussed building data parameters into procurement specifications, the difficulty of 'plug and play' digital systems, and reviewing FOI requests to proactively make information more publicly available. In September 2024, the committee emphasised needing clearer articulation of how spending links to priorities and medium-term plans, which depends on accessible, comparable data. Together, they suggest standardising data interoperability in new systems and publishing commonly requested datasets proactively to support scrutiny.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[07_01_25] \"it is important that the data parameters are built into the specification... we cannot buy a new digital system and just plug and play\"",
+      "[07_01_25] \"we review every [FOI] request... to see whether the information can be made more publicly available... and we try to make things easier.\"",
+      "[10_09_24] \"for the priorities to be meaningfully felt... a clear articulation of how services and spending will work together will be required.\""
+    ]
+  },
+  {
+    "id": "SP_Q016",
+    "query": "Across Sept 10, 2024 (public finance) and Oct 8, 2024 (NPF), what were the two proposed mechanisms for making priorities more visible and connected: (1) mandate letters in budgets and (2) requiring strategies to illustrate alignment with NPF outcomes?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "September 2024 evidence highlighted mandate letters from the emergency budget review as a useful tool for showing how each spending area aligns with priorities, and suggested replicating that for budgets. October 2024 evidence emphasised the need for the Government to visibly embrace the NPF and demonstrate how it is meeting outcomes, reinforcing the idea that policy strategies and budget documents should explicitly map actions/spend to NPF outcomes to strengthen accountability and leadership.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[10_09_24] \"it would be useful to see that type of thing [mandate letters] replicated for budgets.\"",
+      "[08_10_24] \"the Government... should visibly embrace [NPF]... that requires an explicit element of rhetoric and visibility in certain documents.\""
+    ]
+  },
+  {
+    "id": "SP_Q017",
+    "query": "Using June 26, 2024 (EU funds) and Oct 8, 2024 (NPF), explain how both sessions use 'breaking silos' as a theme—one in funding delivery and one in outcome-setting—and what each session implies about coordination.",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "The EU funds statement described a system involving multiple partner organisations (third sector, local government, bodies like NatureScot) delivering projects and claiming costs, requiring coordination across partners and compliance with strict rules. In the NPF session, Forbes said stakeholders want the framework to break short-term cycles and break down silos to take a broader view. Both imply that complex delivery requires coordinated planning and shared frameworks to align actions across organisations and portfolios.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[26_06_24] \"Projects are then set up by partner organisations... third sector... local government or NatureScot.\"",
+      "[08_10_24] \"Those two themes seem to come through: breaking the short-term cycle, and breaking down the silos so that we have a broader view.\""
+    ]
+  },
+  {
+    "id": "SP_Q018",
+    "query": "Connect Sept 10, 2024 (research funding evidence) and Jan 7, 2025 (fiscal sustainability evidence): what do these discussions suggest about the risks of time lags in policy impacts (e.g., REF cycles) when budgets are managed with repeated emergency interventions?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "September 2024 evidence noted long cycles and time lags in the Research Excellence Framework and raised concerns about limited investment in Scotland’s research environment. January 2025 evidence noted reliance on significant interventions, including two emergency spending reviews in three years, and questioned whether interventions assess outcomes/impact. Together, they suggest that emergency short-term budget management can clash with sectors where outcomes materialise over long cycles, making it harder to sustain investment and evaluate impacts.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[10_09_24] \"There is a time lag because the REF has very long cycles.\"",
+      "[07_01_25] \"Two significant emergency spending reviews have taken place in the past three years... not always clear whether... the Government is making an assessment of outcomes or impact\""
+    ]
+  },
+  {
+    "id": "SP_Q019",
+    "query": "Across June 26, 2024 (EU funds) and Sept 10, 2024 (public finances), what comparisons were made between long-term funding cycles and short-term/opaque regimes, and how might that affect the ability to deliver 'shared endeavour over a number of years'?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "Forbes contrasted the seven-year EU structural fund cycles, which enabled long-term projects and predictable future cycles, with the UK Shared Prosperity Fund, described as short term, opaque, and with less autonomy. Audit Scotland emphasised that priorities require a shared endeavour over a number of years and clearer medium-term plans. Short-term and opaque funding regimes make sustained multi-year planning and coordination harder.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[26_06_24] \"shared prosperity fund... opaque... centralised...\"",
+      "[26_06_24] \"seven-year structural fund... enabled truly long-term... projects\"",
+      "[10_09_24] \"the priorities will not be achieved overnight; they will require a shared endeavour over a number of years.\""
+    ]
+  },
+  {
+    "id": "SP_Q020",
+    "query": "Use Oct 8, 2024 (NPF) and Jan 7, 2025 (budget evidence): what was the tension between having a 'short, punchy' Programme for Government (PfG) and the need for explicit visibility/leadership on the NPF and reform delivery?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "Forbes said the PfG aimed to be short, punchy, and clear, and that listing every omitted item would undermine that. However, she also agreed the Government has a visible leadership role in ensuring the NPF is adopted across Scotland. In January 2025, witnesses stressed that reform needs clear underpinning, with numbers and timescales. Together, they illustrate a tension between brevity in political documents and the need for explicit, detailed visibility to enable accountability and scrutiny of outcomes and reform programmes.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[08_10_24] \"the whole point of the PFG was to be short, punchy and clear...\"",
+      "[08_10_24] \"we need to have a visible leadership role when it comes to ensuring that the national performance framework is adopted across Scotland.\"",
+      "[07_01_25] \"see a clear programme of reform, with numbers and timescales to support scrutiny and delivery.\""
+    ]
+  },
+  {
+    "id": "SP_Q021",
+    "query": "Combine Sept 10, 2024 and Jan 7, 2025 evidence: what was said about balancing budgets via interventions and fiscal drag, and why was there concern about the sustainability of current models?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "January 2025 evidence noted the Government has balanced budgets but relies on significant interventions, including emergency spending reviews, and that demand pressures (notably social security) constrain room for manoeuvre. In September 2024, witnesses discussed fiscal drag and warned that inefficient taxes might be used to plug gaps. Together, they point to concern that relying on short-term interventions and stealth revenue increases may not address underlying sustainability problems in service delivery and fiscal pressures.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[07_01_25] \"balanced its budget... relying on significant interventions... Two significant emergency spending reviews\"",
+      "[07_01_25] \"current models are not sustainable... storing up real fiscal pressures.\"",
+      "[10_09_24] \"Fiscal drag is the main policy... people are being dragged into higher tax bands by stealth.\""
+    ]
+  },
+  {
+    "id": "SP_Q022",
+    "query": "Across June 26, 2024 (EU funds) and Sept 10, 2024 (capital prioritisation), what was said about strict eligibility criteria and the need for transparency when projects face funding gaps (e.g., the Citizens Theatre redevelopment)?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "The June 2024 statement described strict and rigid European Commission criteria, noting not many organisations are eligible to claim back funding, and discussed the Citizens Theatre redevelopment’s funding gap and the need to meet those criteria. In September 2024, Audit Scotland argued for more transparency about capital expenditure and how prioritisation decisions are made. Together, they suggest that when projects face capital gaps, clarity on criteria and transparent prioritisation processes are essential for scrutiny and decision-making.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[26_06_24] \"the criteria that are set by the European Commission are extremely strict and quite rigid... not many organisations are eligible\"",
+      "[26_06_24] \"Citizens Theatre... capital funding gap of between £7 million and £15 million\"",
+      "[10_09_24] \"need to be more transparency around capital expenditure... how those prioritisation decisions are made.\""
+    ]
+  },
+  {
+    "id": "SP_Q023",
+    "query": "Use Sept 10, 2024 (child poverty/mandate letters) and Oct 8, 2024 (NPF consensus vs specificity): why does maximising consensus in the NPF potentially make budgeting alignment harder, and what tool was suggested to help make cross-portfolio links clearer?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "Forbes noted that to be 'owned nationally' the NPF is designed to maximise consensus, which can make it general and allow clashes between outcomes. Audit Scotland noted that priorities like child poverty rely on multiple levers across portfolios and called for clear articulation of how spending works together; it highlighted mandate letters as a way for each spending area to show how spending matches priorities, helping make cross-portfolio links clearer despite the framework’s generality.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[08_10_24] \"If we want it to be something that is owned nationally, we have to maximise consensus\"",
+      "[08_10_24] \"one issue seems to be that the national performance framework is so general... outcomes... clashes\"",
+      "[10_09_24] \"A mandate letter... allowed each... spending area to state how its spending would match against... priorities... cross-Government nature.\""
+    ]
+  },
+  {
+    "id": "SP_Q024",
+    "query": "Across Sept 10, 2024 and Jan 7, 2025, what did witnesses say about the relationship between spending choices and outcomes/impact, and what gap in evidence or reporting did they highlight?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "In January 2025, witnesses said it is not always clear whether interventions used to balance the budget are accompanied by an assessment of outcomes or impact. In September 2024, Audit Scotland said that for priorities to be meaningfully understood, there needs to be clear articulation of how services and spending work together, suggesting a gap in evidence/reporting that links spending changes to outcomes across portfolios and over time.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[07_01_25] \"it is not always clear whether... the Government is making an assessment of outcomes or impact when turning the tap off\"",
+      "[10_09_24] \"for the priorities to be meaningfully felt and understood... a clear articulation of how services and spending will work together will be required.\""
+    ]
+  },
+  {
+    "id": "SP_Q025",
+    "query": "Using Sept 10, 2024 evidence on climate/costs and Oct 8, 2024 evidence on capital trade-offs (roads vs houses), explain why the committee is pushing for clearer prioritisation frameworks.",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "September 2024 evidence referenced very large estimated costs of achieving net zero and warned that delaying action increases costs, implying that spending choices now can have long-term fiscal consequences. October 2024 evidence raised the practical challenge of choosing between competing capital demands with limited budgets and questioned whether the NPF helps with such choices. Together, they motivate calls for clearer prioritisation frameworks that explain trade-offs and align capital decisions with long-term outcomes.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[10_09_24] \"the longer we delay taking action... the more expensive it will be\"",
+      "[08_10_24] \"If we have a limited capital budget... choose between roads and houses... does the national performance framework help us...?\""
+    ]
+  },
+  {
+    "id": "SP_Q026",
+    "query": "Cross June 26, 2024 (EU funds) and Jan 7, 2025 (budget evidence): what did these sessions say about 'risk'—(a) Government paying partners at its own risk in EU funds administration and (b) reform being 'too much of a risk' for charities to maintain?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "June 2024 evidence said partners’ costs were covered by the Scottish Government 'at our risk' while reimbursement discussions with the European Commission continued, emphasising reimbursement timing uncertainty. January 2025 evidence included an example where maintaining a programme (Places for Everyone with Sustrans) was described as 'too much of a risk' for the charity to maintain, leading to a joint decision to end it. Together, they show different kinds of operational risk: financial reimbursement risk at government level and delivery/sustainability risk at partner level.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[26_06_24] \"the Scottish Government paid out the funding at our own risk...\"",
+      "[07_01_25] \"It is too much of a risk for Sustrans as a charity to maintain... a joint decision to draw places for everyone to an end.\""
+    ]
+  },
+  {
+    "id": "SP_Q027",
+    "query": "Across Sept 10, 2024 (public finances) and Jan 7, 2025 (budget evidence), what did witnesses say about the need for clarity on priorities over time (10-year view, medium-term plans) and why?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "In September 2024, Professor Heald said Parliament needs to think about what it wants the Scottish tax system to look like in 10 years because improving it takes time and UK policy changes can affect Scotland. Audit Scotland also emphasised that priorities require sustained effort and clearer medium-term plans. In January 2025, Stephen Boyle said scenarios expected in an MTFS were missing, limiting clarity. All point to the need for longer-horizon planning for effective scrutiny and policy coherence.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[10_09_24] \"think clearly about what it wants the Scottish tax system to look like in 10 years’ time\"",
+      "[10_09_24] \"important... to be clear about how the sustained effort will develop over the medium-term plans.\"",
+      "[07_01_25] \"not accompanied by the scenarios that you would expect from a medium-term financial strategy.\""
+    ]
+  },
+  {
+    "id": "SP_Q028",
+    "query": "Across Oct 8, 2024 (NPF) and June 26, 2024 (EU funds), what examples were used to show that accountability often depends on information constraints (eligibility criteria, ongoing negotiations, or public visibility)?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "In June 2024, accountability was constrained by strict EU eligibility criteria and an ongoing reimbursement process; Forbes repeatedly described figures as snapshots until the 2025 outturn. In October 2024, accountability was discussed in terms of public visibility and leadership: if Government holds a large company to account under the NPF, it must be able to show how it is performing too. Both illustrate that scrutiny depends on what information is available, verifiable, and publicly visible.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[26_06_24] \"the criteria... are extremely strict and quite rigid\"",
+      "[26_06_24] \"we will not know the final outturn figures until 2025... snapshot in time\"",
+      "[08_10_24] \"If we are holding that [company] to account... we need to be able to point... to the ways in which we are doing it.\""
+    ]
+  },
+  {
+    "id": "SP_Q029",
+    "query": "Across Sept 10, 2024 and Jan 7, 2025, what did witnesses say about the constraints on 'room for manoeuvre' in budgets and the importance of specifying what services should prioritise?",
+    "query_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_answer": "In January 2025, Stephen Boyle said the Government’s ability to 'turn the tap off' on spending lines is becoming more constrained due to pressures such as social security and workforce issues, and he noted that sectors (like colleges) need a stronger steer on what parts of their role to prioritise. In September 2024, Audit Scotland emphasised that priorities like child poverty require spending across portfolios to be articulated clearly. Together, they point to tightening fiscal constraints and the need for explicit prioritisation guidance.",
+    "reference_answer_by": {
+      "type": "CreatedByType.HUMAN"
+    },
+    "reference_contexts": [
+      "[07_01_25] \"the Government’s room for manoeuvre... is becoming more constrained\"",
+      "[07_01_25] \"colleges need a much stronger steer... on what parts of their role to prioritise.\"",
+      "[10_09_24] \"a clear articulation of how services and spending will work together will be required.\""
+    ]
+  }
+]

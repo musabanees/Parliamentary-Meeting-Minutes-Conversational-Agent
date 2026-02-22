@@ -16,6 +16,13 @@ llama-index-llms-gemini
 llama-index-llms-google-genai
 google-generativeai
 
+# LLM provider - OpenAI (for evaluation judge)
+llama-index-llms-openai
+openai
+
+# Evaluation framework
+ragas
+
 # Embeddings - HuggingFace
 llama-index-embeddings-huggingface
 

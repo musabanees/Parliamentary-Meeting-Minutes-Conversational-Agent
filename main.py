@@ -3,6 +3,8 @@ FastAPI application for Parliamentary Meeting Minutes conversational agent.
 """
 import logging
 from contextlib import asynccontextmanager
+from pathlib import Path
+from datetime import datetime
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -11,8 +13,23 @@ import uvicorn
 
 from parliament_agent.agent import ParliamentAgent
 
-logging.basicConfig(level=logging.INFO)
+# Configure logging to save to logs folder
+LOGS_DIR = Path("logs")
+LOGS_DIR.mkdir(exist_ok=True)
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+log_file = LOGS_DIR / f"api_{timestamp}.log"
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file),
+        logging.StreamHandler()
+    ],
+    force=True
+)
 logger = logging.getLogger(__name__)
+logger.info(f"API logging to {log_file}")
 
 agent: Optional[ParliamentAgent] = None
 
@@ -34,23 +51,14 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-
-class Message(BaseModel):
-    """Represents a single message in the conversation."""
-    role: str
-    content: str
-
-
 class ChatRequest(BaseModel):
-    """Request model for the chat endpoint."""
     query: str
-    history: Optional[List[Message]] = []
-
 
 class ChatResponse(BaseModel):
     """Response model for the chat endpoint."""
     response: str
-    sources: Optional[List[str]] = None
+    content: Optional[List[str]] = None
+    scores: Optional[List[float]] = None
 
 
 @app.get("/health")
@@ -71,16 +79,13 @@ async def chat(request: ChatRequest):
         raise HTTPException(status_code=503, detail="Agent not initialised yet")
 
     try:
-        history_dicts = [
-            {"role": msg.role, "content": msg.content}
-            for msg in (request.history or [])
-        ]
 
-        result = await agent.chat(query=request.query, history=history_dicts)
+        result = await agent.chat(query=request.query)
 
         return ChatResponse(
             response=result["answer"],
-            sources=result.get("sources"),
+            content=result.get("content"),
+            scores=result.get("scores"),
         )
     except Exception as e:
         logger.exception("Error processing chat request")
