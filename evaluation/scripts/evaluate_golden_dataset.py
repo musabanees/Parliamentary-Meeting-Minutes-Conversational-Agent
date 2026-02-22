@@ -140,7 +140,7 @@ class GoldenDatasetEvaluator:
 
         # Get query engine from agent's index
         logging.info("Creating query engine from agent index...")
-        query_engine = agent._index.as_query_engine(similarity_top_k=4, response_mode="compact")
+        query_engine = agent._index.as_query_engine(similarity_top_k=3, response_mode="compact")
 
         # Prepare RAGAS dataset
         ragas_dataset = self.prepare_ragas_dataset(golden_data)
@@ -158,6 +158,7 @@ class GoldenDatasetEvaluator:
             model=judge_model,
             client=openai_client,
             temperature=0,
+            max_tokens=1024
         )
 
         # Initialize metrics with the LLM

@@ -1,8 +1,7 @@
 EMBEDDING_MODEL: "intfloat/e5-small-v2"
 COLLECTION_NAME: "parliamentary_meeting_notes"
-# GENERATION_MODEL: "gemini-2.5-flash"
-GENERATION_MODEL: "gpt-5-nano"
-JUDGE_MODEL: "gpt-4o-mini"
+GENERATION_MODEL: "gpt-4o-mini"
+JUDGE_MODEL: "gpt-4.1-mini"
 
 # Evaluation Configuration
 EVALUATION_RUN_NAME: "Basic_run_with_Sentence_Splitter"

@@ -74,8 +74,6 @@ class ParliamentAgent:
 
     def __init__(self):
         params = _load_params()
-
-
         generation_model = params['GENERATION_MODEL']
 
         # Initialize LlamaDebugHandler for tracking timing
@@ -86,7 +84,6 @@ class ParliamentAgent:
             api_key=OPENAI_API_KEY,
             temperature=0.3,
             )
-
         Settings.embed_model = HuggingFaceEmbedding(
             model_name=params["EMBEDDING_MODEL"],
         )

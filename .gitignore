@@ -49,6 +49,5 @@ vectorstore/
 
 # Logs
 *.log
-
 # helping docs
 cursor/
