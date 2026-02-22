@@ -24,6 +24,7 @@ from llama_index.core.extractors import KeywordExtractor
 from llama_index.core.ingestion import IngestionPipeline
 from llama_index.core.memory import ChatMemoryBuffer
 from llama_index.core.callbacks import CallbackManager, LlamaDebugHandler
+from llama_index.core.postprocessor.rankGPT_rerank import RankGPTRerank
 from llama_index.llms.gemini import Gemini
 from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
@@ -75,15 +76,21 @@ class ParliamentAgent:
     def __init__(self):
         params = _load_params()
         generation_model = params['GENERATION_MODEL']
-
-        # Initialize LlamaDebugHandler for tracking timing
-        llama_debug = LlamaDebugHandler(print_trace_on_end=True)
-        Settings.callback_manager = CallbackManager([llama_debug])
+        # judge_model = params['JUDGE_MODEL']
+        # llm_judge = OpenAI(
+        #     model=judge_model,
+        #     api_key=OPENAI_API_KEY,
+        #     temperature=0.4,
+        # )
         Settings.llm = OpenAI(
             model=generation_model,
             api_key=OPENAI_API_KEY,
             temperature=0.3,
-            )
+        )
+
+        # Initialize LlamaDebugHandler for tracking timing
+        llama_debug = LlamaDebugHandler(print_trace_on_end=True)
+        Settings.callback_manager = CallbackManager([llama_debug])
         Settings.embed_model = HuggingFaceEmbedding(
             model_name=params["EMBEDDING_MODEL"],
         )
@@ -105,12 +112,16 @@ class ParliamentAgent:
 
         self._memory = ChatMemoryBuffer.from_defaults(token_limit=4096)
 
+        # Initialize RankGPT reranker to get top 3 chunks
+        # rankGPT = RankGPTRerank(top_n=5, llm=llm_judge, verbose=True)
+
         self._chat_engine = self._index.as_chat_engine(
             chat_mode="condense_plus_context",
             memory=self._memory,
             llm=Settings.llm,
             verbose=True,
-            similarity_top_k=8,
+            similarity_top_k=10,
+            # node_postprocessors=[rankGPT],
             system_prompt=(
                 "You are a helpful assistant that answers questions about "
                 "Scottish parliamentary meeting minutes. You MUST answer "
@@ -202,7 +213,7 @@ class ParliamentAgent:
         # return {"answer": str(response), "sources": list(set(sources)), "content": content}
         return {"answer": str(response),
                 "content": content_list,
-                "scores": score_list}
+                "sources": sources}
 
 
     def _retrieve(self, query: str, top_k: int = 8) -> List[Dict[str, Any]]:

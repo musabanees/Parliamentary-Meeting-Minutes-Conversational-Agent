@@ -58,7 +58,7 @@ class ChatResponse(BaseModel):
     """Response model for the chat endpoint."""
     response: str
     content: Optional[List[str]] = None
-    scores: Optional[List[float]] = None
+    sources: Optional[List[str]] = None
 
 
 @app.get("/health")
@@ -85,7 +85,7 @@ async def chat(request: ChatRequest):
         return ChatResponse(
             response=result["answer"],
             content=result.get("content"),
-            scores=result.get("scores"),
+            sources=result.get("sources"),
         )
     except Exception as e:
         logger.exception("Error processing chat request")
