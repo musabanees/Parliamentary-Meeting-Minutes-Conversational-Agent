@@ -1,0 +1,173 @@
+[
+    {
+      "id": "SP_CHALLENGE_001",
+      "query": "Synthesize the concerns raised across the Sept 10, 2024, Oct 8, 2024, and Jan 7, 2025 sessions regarding the transition from short-term 'emergency' interventions to long-term planning. Specifically, how do the 'erratic' spending reviews (Sept 10) and 'implicit' inclusion of NPF outcomes (Oct 8) connect to the Auditor General's observation in January 2025 about the sustainability of current budget-balancing models?",
+      "query_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_answer": "Witnesses across three sessions argue that short-termism undermines sustainability. In September 2024, Professor Heald noted that spending reviews have become 'erratic' since the global financial crisis, making capital planning difficult. In October 2024, Kate Forbes defended the 'implicit' inclusion of NPF outcomes in the Programme for Government to keep it 'short and punchy,' despite criticism regarding visibility. By January 2025, the Auditor General (Stephen Boyle) concluded that while the Government successfully balances its budget, the reliance on 'significant interventions' and 'emergency spending reviews' (two in three years) is 'not sustainable' and is 'storing up real fiscal pressures' due to increasing demand in areas like social security.",
+      "reference_answer_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_contexts": [
+        "[10_09_24] \"Since the global financial crisis, spending reviews have come along rather erratically for short periods of time.\"",
+        "[08_10_24] \"inclusion is implicit rather than explicit... the whole point of the PFG was to be short, punchy and clear.\"",
+        "[07_01_25] \"Two significant emergency spending reviews have taken place in the past three years... current models are not sustainable... storing up real fiscal pressures.\""
+      ]
+    },
+    {
+      "id": "SP_CHALLENGE_002",
+      "query": "Compare the 'retrospective' nature of EU structural funds (June 26, 2024) with the 'non-recurrent' funding challenges described by NHS National Services Scotland (Jan 7, 2025) and the 'predictability' of the Registers of Scotland funding model (Jan 7, 2025). What do these suggest about the impact of funding certainty on public sector reform?",
+      "query_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_answer": "Funding certainty is identified as a primary driver of reform capability. In June 2024, Kate Forbes explained that EU funds are 'retrospective,' requiring partners to incur costs upfront at their own risk, which is no longer sustainable for charities like Sustrans (as noted in Jan 2025). In January 2025, Mary Morgan (NHS) expressed a desire to eliminate reliance on 'non-recurrent' funding for projects that happen recurringly to provide certainty of employment. Conversely, Chris Kerr (Jan 7) highlighted that Registers of Scotland successfully cut its workforce by 10% because its fee-based model provides 'predictability' that allows for multi-year investment in digital automation, unlike other bodies dependent on annual settlements.",
+      "reference_answer_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_contexts": [
+        "[26_06_24] \"the system for administering and paying out European structural funds is retrospective... costs are then claimed back from the Scottish Government at our risk.\"",
+        "[07_01_25] \"I would like to eliminate my organisation’s reliance on non-recurrent funding... [to] enable a longer-term funding horizon.\"",
+        "[07_01_25] \"the predictability of housing market income allows us to invest over several years... digital automation will help to contribute to our target of a 10 per cent reduction.\""
+      ]
+    },
+    {
+      "id": "SP_CHALLENGE_003",
+      "query": "Trace the evolution of 'preventative spend' through the transcripts: How did the concerns about 'wrong turnings' in climate policy (Sept 10, 2024) and the 'general' nature of NPF outcomes (Oct 8, 2024) manifest in the Auditor General's January 2025 skepticism about the Government's use of the phrase 'in due course'?",
+      "query_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_answer": "Preventative spend is hindered by a lack of specific milestones and clear pathways. In September 2024, Professor Bell warned against 'wrong turnings' and 'schemes not fully thought through' (like range anxiety in EVs) that lose public confidence. In October 2024, John Mason argued that the NPF is 'so general' it may not help with day-to-day capital choices between 'roads and houses.' This lack of specificity culminated in January 2025, where the Auditor General shared the Convener's 'scepticism' over the Government's promise to update on preventative spend 'in due course,' stating that the absence of 'deadlines, timescales and milestones' makes it impossible to track progress or verify if spending is happening at scale.",
+      "reference_answer_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_contexts": [
+        "[10_09_24] \"moving quickly on the issue makes some sense, but we do not want to move wrongly... Schemes that are not fully thought through...\"",
+        "[08_10_24] \"one issue seems to be that the national performance framework is so general... does [it] help us in making day-to-day decisions?\"",
+        "[07_01_25] \"Use of the phrase ‘in due course’ in the absence of the necessary deadlines and timescales makes it difficult for audit scrutiny... to track and monitor progress.\""
+      ]
+    },
+    {
+      "id": "SP_CHALLENGE_004",
+      "query": "How do the 'mandate letters' discussed on Sept 10, 2024, relate to the 'visible leadership' role described on Oct 8, 2024, and the 'shared service' frustrations mentioned on Jan 7, 2025? In terms of governance, what is the 'burning platform' (Jan 7) for these structural reforms?",
+      "query_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_answer": "Governance reform requires both policy tools and ministerial direction. In September 2024, Audit Scotland proposed replicating 'mandate letters' (which align spending with priorities) for all budgets to manage cross-Government priorities. In October 2024, Kate Forbes agreed the Government needs a 'visible leadership role' so it can point to its own performance when holding others to account. However, by January 2025, Garry McEwan (FSS) noted that shared service work 'stopped' or 'withered' until recently, citing a lack of 'urgency' from the Government. Mary Morgan defined the 'burning platform' for these changes as either an emergency 'in flames' or a 'smouldering' case where something like a contract end provides a 'compelling case for change' that is often missed.",
+      "reference_answer_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_contexts": [
+        "[10_09_24] \"A mandate letter... allowed each Scottish Government spending area to state how its spending would match against the Government’s priorities.\"",
+        "[08_10_24] \"we need to have a visible leadership role in ensuring that the NPF is adopted across Scotland.\"",
+        "[07_01_25] \"that work did not quite wither on the vine but it stopped... [The burning platform] can be something that is smouldering and lets us see that we have a compelling case for change.\""
+      ]
+    },
+    {
+      "id": "SP_CHALLENGE_005",
+      "query": "Analyze the 'Transperancy' debate across the four transcripts. Connect the 'snapshot' figures in EU reclaims (June 26), the 'lack of disaggregated data' (Oct 8), the 'degradation of capital assets' (Sept 10), and the Auditor General's point about 'moving targets' (Jan 7). What is the specific barrier to effective parliamentary scrutiny identified here?",
+      "query_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_answer": "The primary barrier to scrutiny is the absence of a consistent baseline and scenario-based planning. In June 2024, Forbes resisted giving outturn figures because they were only 'snapshots in time.' In September 2024, witnesses highlighted the 'degradation' of assets and 'opacity' of new UK funds. In October 2024, Michelle Thomson noted a failure to routinely collect 'disaggregated data' (e.g., gender), which Keith McDonald admitted led to 'data gaps.' Finally, in January 2025, the Auditor General stated it is 'hard to scrutinise or audit a moving target' and that without a 'baseline' or 'scenario analysis' in a Medium-Term Financial Strategy (MTFS), Parliament cannot support effective choices or understand if reform is achieving its intended fiscal savings.",
+      "reference_answer_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_contexts": [
+        "[26_06_24] \"I do not intend to mislead Parliament by giving figures that are only a snapshot in time.\"",
+        "[10_09_24] \"physical state of the infrastructure is deteriorating... maintenance problem.\"",
+        "[08_10_24] \"we do not routinely collect disaggregated data... that can lead to data gaps in the indicator set.\"",
+        "[07_01_25] \"it is hard to scrutinise or audit a moving target... there does not seem to be a baseline to show where we are now compared to where we want to get to.\""
+      ]
+    },
+      {
+      "id": "SP_Q101",
+      "query": "Across the June 26, 2024 statement on EU structural funds, the Sept 10, 2024 public-finance session, the Oct 8, 2024 evidence session on the National Performance Framework (NPF), and the Jan 7, 2025 budget session: what did speakers say about (1) multi-year ‘cycles’ / time horizons, and (2) what was missing from Scotland’s medium-term planning and forward projections (e.g., MTFS scenarios)?",
+      "query_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_answer": "Speakers repeatedly emphasised the need for multi-year horizons and clearer medium-term planning. On June 26, 2024, Kate Forbes described EU structural funding as organised in cycles (including the expectation that leftover funding can carry into the next period) and said that, because of Brexit, there are no future EU funding cycles. On Sept 10, 2024, Richard Robinson said scrutiny and sustainability assessment are difficult without an up-to-date Medium-Term Financial Strategy (MTFS), noting the last MTFS was published in May 2023 and another might not appear until spring/summer the following year. On Jan 7, 2025, Stephen Boyle said the budget’s forward projections are not accompanied by the scenarios that would normally sit within an MTFS, which limits clarity and assessment. On Oct 8, 2024, Forbes also argued that the NPF is intended to outlast political cycles, reinforcing the need for longer-term frameworks rather than single-year snapshots.",
+      "reference_answer_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_contexts": [
+        "[26_06_24] Kate Forbes: \"At the end of every funding period, any leftover funding would usually count towards the next funding period. Because of Brexit, there are no future funds and that means that Scotland will lose out on significant funding of euros that could be received by projects across the country.\"",
+        "[26_06_24] Kate Forbes: \"the system for administering and paying out European structural funds is retrospective. Allocations of potential funding are notified to member states at the start of each seven-year programme.\"",
+        "[10_09_24] Richard Robinson: \"The most recent medium-term financial strategy was in May 2023. A lot has happened since then and we might not get another one until some point in the spring or summer of next year.\"",
+        "[07_01_25] Stephen Boyle: \"Although forward projections are set out in the budget, those are not accompanied by the scenarios that you would expect from a medium-term financial strategy.\"",
+        "[08_10_24] Kate Forbes: \"the national performance framework outlasts political cycles.\""
+      ]
+    },
+    {
+      "id": "SP_Q102",
+      "query": "Across June 26, 2024 (EU structural funds statement), Sept 10, 2024 (budget scrutiny), Oct 8, 2024 (NPF), and Jan 7, 2025 (budget): what transparency/scrutiny problems were raised, and what concrete information or documents did speakers say would help Parliament scrutinise decisions?",
+      "query_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_answer": "Across the sessions, speakers highlighted transparency gaps that weaken parliamentary scrutiny and named specific information that would help. On June 26, 2024, Forbes said constituents were frustrated by the lack of transparency about how to apply for comparable replacement funding such as the Shared Prosperity Fund. On Sept 10, 2024, Robinson said the materials that best enable scrutiny of the budget include capital information, the MTFS/medium-term financial picture, and the tax strategy expected alongside the budget. On Oct 8, 2024, Forbes said Parliament needs to be sighted on what Government is doing and cautioned against confusing ‘visibility’ with ‘practice’, implying clearer reporting is needed. On Jan 7, 2025, Boyle endorsed the ‘lack of transparency’ diagnosis and called for more clarity around the data and documents required for better scrutiny.",
+      "reference_answer_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_contexts": [
+        "[26_06_24] Kate Forbes: \"frustrated by the complete lack of transparency about how to apply for comparable funding such as the shared prosperity fund.\"",
+        "[10_09_24] Richard Robinson: \"Those will include capital information and information about the medium-term financial strategy and the medium-term financial picture, as well as the tax strategy that is expected alongside the budget.\"",
+        "[08_10_24] Kate Forbes: \"confusing visibility for practice. Parliament needs to be sighted on how we are doing things and what we are doing.\"",
+        "[07_01_25] Stephen Boyle: \"lack of transparency and the need for more clarity around data and documents to support better scrutiny.\""
+      ]
+    },
+    {
+      "id": "SP_Q103",
+      "query": "Using evidence from June 26, 2024 (EU structural funds), Sept 10, 2024 (budget scrutiny), Oct 8, 2024 (NPF), and Jan 7, 2025 (budget): what did the sessions say about why capital/resource planning is hard to scrutinise, and how did speakers describe (a) missing capital plans/pipelines, (b) linking budgets to outcomes, and (c) the retrospective timing of reimbursements?",
+      "query_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_answer": "Across the sessions, capital/resource scrutiny problems were linked to missing plans and to complex funding timelines. On Sept 10, 2024, Robinson said capital information is one of the key inputs Parliament needs (alongside MTFS and tax strategy) to scrutinise the budget. On Jan 7, 2025, Boyle said the absence of a medium-term financial strategy, the capital investment pipeline plan, and an NHS capital plan are barriers to Parliament supporting effective choices and to public bodies implementing those choices. On Oct 8, 2024, Forbes said budgets are ‘mechanical’ and therefore easier to map inputs to outcomes and link spending to the NPF—implying that missing plans/data hinder that mapping. On June 26, 2024, Forbes described EU structural funding as retrospective and set out the reimbursement timeline (claims submitted in July and October, with final reimbursement payments not until 2025), illustrating how timing/lag complicates planning and scrutiny.",
+      "reference_answer_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_contexts": [
+        "[10_09_24] Richard Robinson: \"Those will include capital information and information about the medium-term financial strategy and the medium-term financial picture, as well as the tax strategy that is expected alongside the budget.\"",
+        "[07_01_25] Stephen Boyle: \"Not having a medium-term financial strategy or the capital investment pipeline plan and, to analyse it further, the absence of an NHS capital plan are barriers to Parliament supporting effective choices and to the implementation of those choices by public bodies across the country.\"",
+        "[08_10_24] Kate Forbes: \"The budget is an inherently mechanical thing and in that world it is much easier to link the budget directly to the national performance framework. For example, I found it a lot easier to come to committee and to directly map inputs to outcomes, and say that we chose to spend the money on an area directly for whatever reason.\"",
+        "[26_06_24] Kate Forbes: \"the system for administering and paying out European structural funds is retrospective. Allocations of potential funding are notified to member states at the start of each seven-year programme.\"",
+        "[26_06_24] Kate Forbes: \"We will submit substantial reimbursement claims to the European Commission in July—next month—and a final one will be submitted in October this year. Those will include reimbursement claims for all structural fund projects delivered by partners and for eligible funding towards the costs of accommodation and support services for Ukrainian migrants to Scotland. The date of the final reimbursement payments from the European Commission to us will not be until 2025.\""
+      ]
+    },
+    {
+      "id": "SP_Q104",
+      "query": "Across Sept 10, 2024 (budget scrutiny), Oct 8, 2024 (NPF), Jan 7, 2025 (budget), and June 26, 2024 (EU funding): what accountability mechanisms were proposed or discussed (e.g., mandate letters, NPF alignment requirements, a finance bill), and what problem did each mechanism aim to fix?",
+      "query_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_answer": "Multiple mechanisms were discussed as ways to strengthen accountability and make decisions easier to scrutinise. On Sept 10, 2024, Robinson described ‘mandate letters’ as a tool where each spending area states how its spending matches Government priorities, helping others see how different portfolios contribute to cross-government priorities. On Oct 8, 2024, Forbes said improving reporting and accountability could include requiring every strategy document to illustrate how it aligns with the NPF, addressing concerns that major strategy documents do not consistently reference it. On Jan 7, 2025, Liz Smith raised the idea of a finance bill as a mechanism to improve transparency and accountability around budgeting; Boyle responded that he would avoid committing to a finance bill as the key solution and argued that better scrutiny could be achieved through improved provision of information and data without legislation. On June 26, 2024, Forbes characterised the Shared Prosperity Fund process as opaque/centralised, which is the type of accountability gap these proposed mechanisms are meant to reduce.",
+      "reference_answer_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_contexts": [
+        "[10_09_24] Richard Robinson: \"It allowed each Scottish Government spending area to state how its spending would match against the Government’s priorities.\"",
+        "[08_10_24] Kate Forbes: \"If it is as simple as every strategy having to illustrate how it aligns with the national performance framework, we could consider that, or whether there are other ways of doing it.\"",
+        "[07_01_25] Liz Smith: \"Do you think that Parliament having a finance bill, which obviously we do not have right now, might help with transparency and accountability?\"",
+        "[07_01_25] Stephen Boyle: \"However, I would avoid falling in behind support for a finance bill, primarily because I would not want to pin my colours to the mast and say that that would be the only, or the next, mechanism for achieving that. I am sure that an alternative case could be made that we can achieve better scrutiny without legislation. Indeed, I think that we should be achieving better scrutiny through better provision of information and data to both the Fiscal Commission and the committee, as well as to us for audit purposes, to support that scrutiny.\"",
+        "[26_06_24] Kate Forbes: \"the shared prosperity fund, which is opaque to constituents, centralised and difficult to engage with.\""
+      ]
+    },
+    {
+      "id": "SP_Q105",
+      "query": "Across June 26, 2024 (EU structural funds), Sept 10, 2024 (budget scrutiny), Oct 8, 2024 (NPF), and Jan 7, 2025 (budget): how did the discussions distinguish between (1) outcomes/priorities, (2) ‘means’ like economic growth, (3) constraints on what certain funding can be used for, and (4) what evidence/planning is needed to show whether spending aligns with those priorities/outcomes?",
+      "query_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_answer": "Across the documents, participants separated desired outcomes/priorities from the tools, constraints, and evidence needed to show alignment. On Sept 10, 2024, Robinson highlighted cross-government priorities (child poverty, the economy, the climate emergency) and described mandate letters as a way for spending areas to show how spending matches priorities. On Oct 8, 2024, Forbes explicitly framed economic growth as a ‘means to an end’ and said she would be reluctant to embed it as a national outcome because that would confuse means and ends. On June 26, 2024, Forbes set out a hard constraint on funding: EU structural funds cannot be used for core public services (e.g., the NHS, local government, core infrastructure) and are not a replacement for public sector funding. On Jan 7, 2025, Boyle linked alignment/scrutiny to evidence: forward projections exist but are not accompanied by the MTFS-style scenarios needed for clearer assessment of whether spending decisions support longer-term priorities and outcomes.",
+      "reference_answer_by": {
+        "type": "CreatedByType.HUMAN"
+      },
+      "reference_contexts": [
+        "[10_09_24] Richard Robinson: \"From the recommendations that were set out, whether on child poverty, the economy or the climate emergency, it is clear that the same principles will apply because of their cross-Government nature.\"",
+        "[10_09_24] Richard Robinson: \"It allowed each Scottish Government spending area to state how its spending would match against the Government’s priorities.\"",
+        "[08_10_24] Kate Forbes: \"To my mind, economic growth it is not an end in itself. The end is the outcomes that are captured in the national performance framework. When we talk about economic growth, that is about making Scotland more prosperous and fairer, and it is a means of delivering against our environmental ambitions. It is a means to an end.\"",
+        "[08_10_24] Kate Forbes: \"I would be reluctant to embed economic growth as a national outcome in and of itself, as that would be confusing means and ends. We do not celebrate economic growth as an end in itself.\"",
+        "[26_06_24] Kate Forbes: \"the funds cannot be used for core public services, so they cannot be used—as some have suggested—to mitigate the impact of austerity on our national health service, on local government or on core infrastructure. The funds are not a replacement for public sector funding.\"",
+        "[07_01_25] Stephen Boyle: \"Although forward projections are set out in the budget, those are not accompanied by the scenarios that you would expect from a medium-term financial strategy.\""
+      ]
+    }
+  ]

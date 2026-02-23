@@ -18,20 +18,25 @@ from llama_index.core import (
     SimpleDirectoryReader,
     VectorStoreIndex,
     StorageContext,
+    get_response_synthesizer,
 )
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.extractors import KeywordExtractor
 from llama_index.core.ingestion import IngestionPipeline
 from llama_index.core.memory import ChatMemoryBuffer
 from llama_index.core.callbacks import CallbackManager, LlamaDebugHandler
-from llama_index.core.postprocessor.rankGPT_rerank import RankGPTRerank
-from llama_index.llms.gemini import Gemini
+# from llama_index.postprocessor.flag_embedding_reranker import FlagEmbeddingReranker  # BGE reranker
+from llama_index.core.retrievers import VectorIndexRetriever
+from llama_index.core.query_engine import RetrieverQueryEngine
+from llama_index.core.chat_engine import CondensePlusContextChatEngine
+from llama_index.retrievers.bm25 import BM25Retriever
 from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 import google.genai.types as types
 
 from parliament_agent.vector_store.qdrant_client import QdrantVectorStoreManager
+from parliament_agent.retrievers import HybridRetriever
 
 logger = logging.getLogger(__name__)
 
@@ -112,16 +117,61 @@ class ParliamentAgent:
 
         self._memory = ChatMemoryBuffer.from_defaults(token_limit=4096)
 
-        # Initialize RankGPT reranker to get top 3 chunks
-        # rankGPT = RankGPTRerank(top_n=5, llm=llm_judge, verbose=True)
+        # Set up Hybrid Retriever (BM25 + Vector Search)
+        logger.info("Setting up hybrid retriever (BM25 + Vector)...")
 
-        self._chat_engine = self._index.as_chat_engine(
-            chat_mode="condense_plus_context",
+        # Get all nodes from the index docstore for BM25
+        # The docstore contains RefDocNode objects, we need to get the actual nodes
+        all_nodes = []
+        for node_id, node in self._index.docstore.docs.items():
+            if hasattr(node, 'node'):
+                all_nodes.append(node.node)
+            else:
+                all_nodes.append(node)
+
+        logger.info(f"Retrieved {len(all_nodes)} nodes for BM25 indexing")
+
+        if len(all_nodes) == 0:
+            # Fallback: retrieve nodes via the retriever
+            temp_retriever = self._index.as_retriever(similarity_top_k=1000)
+            all_nodes = temp_retriever.retrieve("parliament")
+            all_nodes = [n.node for n in all_nodes]
+            logger.info(f"Fallback: Retrieved {len(all_nodes)} nodes via retriever")
+
+        # Create BM25 retriever
+        bm25_retriever = BM25Retriever.from_defaults(
+            nodes=all_nodes,
+            similarity_top_k=5,  # Reduced from 13 since no reranking
+        )
+
+        # Create vector retriever
+        vector_retriever = VectorIndexRetriever(
+            index=self._index,
+            similarity_top_k=5,  # Reduced from 13 since no reranking
+        )
+
+        # Create hybrid retriever
+        hybrid_retriever = HybridRetriever(
+            vector_retriever=vector_retriever,
+            bm25_retriever=bm25_retriever,
+            mode="interleave",  # Alternate between vector and BM25 results
+        )
+
+        # # Initialize BGE reranker to get top 5 chunks after hybrid retrieval
+        # logger.info("Initializing BGE reranker (BAAI/bge-reranker-v2-m3)...")
+        # bge_reranker = FlagEmbeddingReranker(
+        #     model="BAAI/bge-reranker-v2-m3",
+        #     top_n=5,
+        #     use_fp16=True,
+        # )
+
+        # Wrap in CondensePlusContextChatEngine for conversational context
+        self._chat_engine = CondensePlusContextChatEngine.from_defaults(
+            retriever=hybrid_retriever,
             memory=self._memory,
             llm=Settings.llm,
             verbose=True,
-            similarity_top_k=10,
-            # node_postprocessors=[rankGPT],
+            # node_postprocessors=[bge_reranker],  # BGE reranker commented out
             system_prompt=(
                 "You are a helpful assistant that answers questions about "
                 "Scottish parliamentary meeting minutes. You MUST answer "
