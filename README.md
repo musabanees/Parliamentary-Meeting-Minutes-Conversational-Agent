@@ -7,7 +7,6 @@ This project delivers an advanced, production-ready RAG (Retrieval-Augmented Gen
 
 The architecture transitioned from a high-efficiency **Base Implementation** to a high-precision **Enhanced Production Architecture**. By implementing a **Hybrid-Rerank** strategy and **Multi-turn Contextualization**, the system achieved a **25% gain in Faithfulness** and nearly **perfect Context Precision (0.98)** on complex, multi-document queries.
 
----
 
 ## Technical Architecture & Design Decisions
 
@@ -25,7 +24,6 @@ I used **intfloat/e5-small-v2** because it gives a strong quality-to-speed trade
 
 For chunking, I used SentenceSplitter with 400 characters and 100 overlap as a practical baseline. This configuration delivered fast retrieval and low latency, and it generally returned grounded (source-backed) answers. However, it sometimes lacked completeness for multi-turn discussions because the fixed character-based splits could cut through a conversation at uneven points, causing key speaker turns or surrounding context to fall into adjacent chunks and be missed during retrieval.
 
----
 
 ### 2. Enhanced Version (The Production Approach)
 
@@ -47,7 +45,7 @@ Interleaving gives the best of both: higher Hit Rate for keyword queries and bet
 
 I also upgraded the embeddings to **text-embedding-3-small** to improve retrieval ranking quality on harder cases, especially when the question is not a direct keyword match (e.g., “What was the argument for removing the no-compulsory-redundancy policy?”). The higher-capacity embedding space helps pull the most relevant conversational evidence closer to the top of the results list, improving MRR and reducing the need to increase top_k aggressively.
 
-I chose a 500-token chunk size to better preserve full conversation turns (e.g., a question, the response, and the follow-up often appear across multiple speaker lines). To validate the chunk boundaries visually, I used ChunkViz `(https://chunkviz.up.railway.app/)`. In the `ChunkViz view`, the highlighted spans showed that a max ~500-token window most consistently captured the complete exchange in a single chunk, instead of splitting key speaker turns across multiple chunks. Please see the image down below.
+I chose a 500-token chunk size to better preserve full conversation turns (e.g., a question, the response, and the follow-up often appear across multiple speaker lines). To validate the chunk boundaries visually, I used ChunkViz `(https://chunkviz.up.railway.app/)`. In the `ChunkViz view`, the highlighted spans showed that a max ~500-token window most consistently captured the complete exchange in a single chunk, instead of splitting key speaker turns across multiple chunks. _Please see the image down below._
 
 To support follow-up questions like `What did he say next?` or `Who disagreed with that point?`, I used **CondensePlusContextChatEngine** with **ChatMemoryBuffer**. This allows the system to resolve references like he/who/that point by carrying forward the conversational state and rewriting the user query into a standalone question that retrieval can answer reliably. Finally, I added RankGPTRerank to improve the ordering of retrieved chunks. Finally, I used the gptranker to rank the chunks and retrieved top 5.
 
@@ -55,7 +53,7 @@ To support follow-up questions like `What did he say next?` or `Who disagreed wi
 <p align="center">
   <img src="images/recurssrive_chunking_chunk_size_snapshot.png" width="800" alt="Recursive Chunking SnapShot">
 </p>
----
+
 
 ## Evaluation & Performance Metrics
 
@@ -92,14 +90,12 @@ I maintained **three versions**:
      * higher risk of “topic overlap” (similar terms across dates)
      * questions required the grounded answers.
 
----
 
 ### Metrics Used
 
 * **Retriever metrics:** Hit Rate, MRR
 * **RAGAS metrics:** Faithfulness, Context Precision, Context Recall
 
----
 ### Baseline vs. Production Results (Hard Dataset)
 
 | Metric | Base (Vector Only) | **Enhanced (Production)** | Improvement |
@@ -111,20 +107,15 @@ I maintained **three versions**:
 ### Reports of the A/B testing
 
 * **BASIC (Retriever Metrics) — Base (V1)** Report: `evaluation/results/Basic_run_with_Sentence_Splitter_V1_BASIC.md`
-
 * **HARD (RAGAS) — Base (V1)** Report: `evaluation/results/Golden_Dataset_Evaluation_V1_HARD.md`
-
 * **EXTREME HARD (RAGAS) — Base (V1)** Report: `evaluation/results/Golden_Dataset_Evaluation_V1_EXTREME_HARD.md`
-
 * **BASIC (Retriever Metrics) — Enhanced (V2)** Report: `evaluation/results/Basic_run_with_Sentence_Splitter_V2_BASIC.md`
-
 * **HARD (RAGAS) — Enhanced (V2)** Report: `evaluation/results/Golden_Dataset_Evaluation_V2_HARD.md`
-
 * **EXTREME HARD (RAGAS) — Enhanced (V2)** Report: `evaluation/results/Golden_Dataset_Evaluation_V2_EXTREME_HARD.md`
 
 V2 shows a big improvement in answer quality on the Hard dataset: it is more grounded (faithfulness 0.8959) and retrieves cleaner + more complete context (precision 0.9182, recall 0.8512), so answers are usually correct and well-supported. On the Extreme Hard dataset, V2 achieves very high precision (0.9800), meaning it almost always selects the most relevant evidence with minimal noise, which helps reduce hallucinations.
 
----
+
 
 ## Getting Started
 
@@ -161,7 +152,17 @@ python evaluation/scripts/evaluate_golden_dataset.py
 python main.py
 ```
 
-### Cost summary (including total)
+## Traces and Observability
+
+Integrated logging and tracing provide real-time visibility into the RAG pipeline.
+
+<p align="center">
+<img src="images/traces_and_observability.png" alt="Traces and Observability" width="800">
+</p>
+
+Every interaction is fully traced using LlamaIndex, capturing query rewriting logic, retrieval metrics, and latency across all components to ensure effective observability and debugging.
+
+## Cost summary (including total)
 
 The cost is mainly **LLM tokens × model price** across: **Condense → (optional) query embedding → GPT rerank → Final answer**
 
@@ -190,4 +191,3 @@ Assume per query:
 * Judge (eval only): **900 in / 250 out**
 
 ✅ **Total runtime cost (no judge)** ≈ **$0.00147 per query**
-
