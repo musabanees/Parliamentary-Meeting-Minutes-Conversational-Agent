@@ -138,6 +138,8 @@ Create a `.env` file with your `OPENAI_API_KEY`. Configuration parameters for ch
 # Start Qdrant and the API service
 docker compose build --no-cache
 
+docker compose up
+
 ```
 
 ### 3. Run Evaluations & Tests

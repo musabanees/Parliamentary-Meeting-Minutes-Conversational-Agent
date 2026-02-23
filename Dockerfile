@@ -15,7 +15,7 @@
     COPY requirements.txt .
 
     # Install dependencies into /install so we can copy them into runtime image
-    RUN pip install --upgrade pip wheel \
+    RUN pip install --upgrade pip \
      && pip install --no-cache-dir --prefer-binary --prefix=/install -r requirements.txt
 
 
@@ -48,4 +48,4 @@
 
     USER appuser
 
-    CMD ["python", "main.py"]
+    CMD ["uvicorn", "main:app", "--host=0.0.0.0", "--port=8000"]

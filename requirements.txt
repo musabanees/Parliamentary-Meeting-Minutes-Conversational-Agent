@@ -1,43 +1,38 @@
 # FastAPI and server dependencies
 fastapi==0.115.0
 uvicorn[standard]==0.32.0
-pydantic==2.9.2
+pydantic>=2.11.5,<3
 
 # Testing
 pytest==8.3.3
 httpx==0.27.2
-pytest-asyncio
+pytest-asyncio==1.3.0
 
 # LlamaIndex core
-llama-index-core
+llama-index-core==0.14.15
 
-# LLM provider - Gemini
-llama-index-llms-gemini
-llama-index-llms-google-genai
-google-generativeai
 
 # LLM provider - OpenAI
-llama-index-llms-openai
-openai
+llama-index-llms-openai==0.6.19
+openai==2.21.0
 
 # Embeddings
-llama-index-embeddings-huggingface
-llama-index-embeddings-openai
+llama-index-embeddings-openai==0.5.1
 
 # Vector store - Qdrant
-llama-index-vector-stores-qdrant
-qdrant-client
+llama-index-vector-stores-qdrant==0.9.1
+qdrant-client==1.17.0
 
 # Retrievers
-llama-index-retrievers-bm25
+llama-index-retrievers-bm25==0.6.5
 
 # Evaluation framework
-ragas
+ragas==0.4.3
 
 # Utilities
-python-dotenv
-pyyaml
-pandas
-tqdm
-nest-asyncio
-autopep8
+python-dotenv==1.2.1
+PyYAML==6.0.3
+pandas==2.3.3
+tqdm==4.67.3
+nest-asyncio==1.6.0
+autopep8==2.3.2
