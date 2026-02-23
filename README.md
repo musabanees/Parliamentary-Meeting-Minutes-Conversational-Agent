@@ -189,4 +189,3 @@ Assume per query:
 
 ✅ **Total runtime cost (no judge)** ≈ **$0.00147 per query**
 
-

@@ -263,7 +263,6 @@ class ParliamentAgent:
         logger.info(f"Memory now contains {len(updated_memory)} messages")
 
         return {"answer": str(response),
-                "content": content_list,
                 "sources": sources}
 
     def _retrieve(self, query: str, top_k: int = 8) -> List[Dict[str, Any]]:

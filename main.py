@@ -57,7 +57,6 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     """Response model for the chat endpoint."""
     response: str
-    content: Optional[List[str]] = None
     sources: Optional[List[str]] = None
 
 
@@ -84,7 +83,6 @@ async def chat(request: ChatRequest):
 
         return ChatResponse(
             response=result["answer"],
-            content=result.get("content"),
             sources=result.get("sources"),
         )
     except Exception as e:

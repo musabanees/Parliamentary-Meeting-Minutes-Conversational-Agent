@@ -1,6 +1,3 @@
-"""
-API and agent tests for the Parliamentary Minutes Chat API.
-"""
 import pytest
 from unittest.mock import patch, MagicMock
 from fastapi.testclient import TestClient
@@ -9,14 +6,14 @@ from fastapi.testclient import TestClient
 def _make_app_with_mock_agent():
     """Create app instance with a mocked ParliamentAgent."""
     mock_agent = MagicMock()
-    
+
     async def mock_chat(*args, **kwargs):
         return {
             "answer": "The committee discussed fiscal sustainability.",
             "sources": ["scottish_parliament_report_07_01_25.txt (Speaker: Stephen Boyle)"],
             "content": ["The Auditor General discussed fiscal sustainability measures..."],
         }
-    
+
     mock_agent.chat = mock_chat
 
     with patch("main.ParliamentAgent", return_value=mock_agent):
@@ -85,12 +82,12 @@ class TestChatEndpoint:
 
     def test_chat_endpoint_returns_500_on_agent_error(self, client_and_agent):
         client, mock_agent = client_and_agent
-        
+
         async def mock_chat_error(*args, **kwargs):
             raise RuntimeError("LLM error")
-        
+
         mock_agent.chat = mock_chat_error
-        
+
         response = client.post(
             "/chat",
             json={"query": "test query"},
