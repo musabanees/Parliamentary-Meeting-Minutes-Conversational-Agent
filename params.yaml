@@ -1,13 +1,12 @@
-EMBEDDING_MODEL: "intfloat/e5-small-v2"
-COLLECTION_NAME: "parliamentary_meeting_notes"
+EMBEDDING_MODEL: "text-embedding-3-small"
+# COLLECTION_NAME: "parliamentary_meeting_notes"
+COLLECTION_NAME: "parliamentary_meeting_notes_v2"
 GENERATION_MODEL: "gpt-4o-mini"
 JUDGE_MODEL: "gpt-4.1-mini"
 
 # Evaluation Configuration
-EVALUATION_RUN_NAME: "Basic_run_with_Sentence_Splitter"
-EVALUATION_RUN_DESCRIPTION: "Baseline run with Sentence Splitter with 400 Chunks"
 EVALUATION_RESULTS_PATH: "evaluation/results"
 EVALUATION_DATASET_PATH: "evaluation/dataset/rag_eval_dataset.json"
-GOLDEN_DATASET_PATH: "evaluation/dataset/complex_top_10_golden_dataset.json"
+GOLDEN_DATASET_PATH: "evaluation/dataset/HARD_parliament_rag_golden_dataset.json"
 TOP_K_VALUES: [2, 4, 6, 8, 10, 12, 20]
-MAX_NODES_FOR_EVAL: null  # null means use all nodes
+MAX_NODES_FOR_EVAL: 50  # null means use all nodes

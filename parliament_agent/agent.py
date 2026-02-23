@@ -1,13 +1,7 @@
-"""
-Parliamentary Meeting Minutes Conversational Agent.
-
-RAG-based agent using LlamaIndex with Qdrant vector store,
-Gemini LLM, and HuggingFace embeddings over Scottish Parliament transcripts.
-"""
 import os
 import logging
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from datetime import datetime
 
 import yaml
@@ -21,22 +15,18 @@ from llama_index.core import (
     get_response_synthesizer,
 )
 from llama_index.core.node_parser import SentenceSplitter
-from llama_index.core.extractors import KeywordExtractor
-from llama_index.core.ingestion import IngestionPipeline
 from llama_index.core.memory import ChatMemoryBuffer
 from llama_index.core.callbacks import CallbackManager, LlamaDebugHandler
-# from llama_index.postprocessor.flag_embedding_reranker import FlagEmbeddingReranker  # BGE reranker
 from llama_index.core.retrievers import VectorIndexRetriever
+from llama_index.core.postprocessor.rankGPT_rerank import RankGPTRerank
 from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.core.chat_engine import CondensePlusContextChatEngine
 from llama_index.retrievers.bm25 import BM25Retriever
 from llama_index.llms.openai import OpenAI
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.embeddings.openai import OpenAIEmbedding
 
-import google.genai.types as types
-
-from parliament_agent.vector_store.qdrant_client import QdrantVectorStoreManager
-from parliament_agent.retrievers import HybridRetriever
+from parliament_agent.qdrant_client import QdrantVectorStoreManager
+from parliament_agent.hybrid_retriever import HybridRetriever
 
 logger = logging.getLogger(__name__)
 
@@ -79,31 +69,32 @@ class ParliamentAgent:
     """
 
     def __init__(self):
-        params = _load_params()
-        generation_model = params['GENERATION_MODEL']
-        # judge_model = params['JUDGE_MODEL']
-        # llm_judge = OpenAI(
-        #     model=judge_model,
-        #     api_key=OPENAI_API_KEY,
-        #     temperature=0.4,
-        # )
+        self.params = _load_params()
+        self.generation_model = self.params['GENERATION_MODEL']
+        self.judge_model = self.params['JUDGE_MODEL']
+        self.llm_judge = OpenAI(
+            model=self.judge_model,
+            api_key=OPENAI_API_KEY,
+            temperature=0.4,
+        )
+
         Settings.llm = OpenAI(
-            model=generation_model,
+            model=self.generation_model,
             api_key=OPENAI_API_KEY,
             temperature=0.3,
         )
-
         # Initialize LlamaDebugHandler for tracking timing
         llama_debug = LlamaDebugHandler(print_trace_on_end=True)
         Settings.callback_manager = CallbackManager([llama_debug])
-        Settings.embed_model = HuggingFaceEmbedding(
-            model_name=params["EMBEDDING_MODEL"],
+        Settings.embed_model = OpenAIEmbedding(
+            model=self.params["EMBEDDING_MODEL"],
+            api_key=OPENAI_API_KEY,
         )
 
         self._qdrant_manager = QdrantVectorStoreManager()
-
         if self._qdrant_manager.collection_exists():
-            logger.info("Collection already populated – loading existing index")
+            logger.info(
+                "Collection already populated – loading existing index")
             storage_context = StorageContext.from_defaults(
                 vector_store=self._qdrant_manager.vector_store
             )
@@ -114,14 +105,11 @@ class ParliamentAgent:
         else:
             logger.info("Collection empty – running ingestion pipeline")
             self._index = self._ingest()
-
         self._memory = ChatMemoryBuffer.from_defaults(token_limit=4096)
 
         # Set up Hybrid Retriever (BM25 + Vector Search)
         logger.info("Setting up hybrid retriever (BM25 + Vector)...")
 
-        # Get all nodes from the index docstore for BM25
-        # The docstore contains RefDocNode objects, we need to get the actual nodes
         all_nodes = []
         for node_id, node in self._index.docstore.docs.items():
             if hasattr(node, 'node'):
@@ -132,46 +120,41 @@ class ParliamentAgent:
         logger.info(f"Retrieved {len(all_nodes)} nodes for BM25 indexing")
 
         if len(all_nodes) == 0:
-            # Fallback: retrieve nodes via the retriever
             temp_retriever = self._index.as_retriever(similarity_top_k=1000)
             all_nodes = temp_retriever.retrieve("parliament")
             all_nodes = [n.node for n in all_nodes]
-            logger.info(f"Fallback: Retrieved {len(all_nodes)} nodes via retriever")
+            logger.info(
+                f"Fallback: Retrieved {len(all_nodes)} nodes via retriever")
 
-        # Create BM25 retriever
         bm25_retriever = BM25Retriever.from_defaults(
             nodes=all_nodes,
-            similarity_top_k=5,  # Reduced from 13 since no reranking
+            similarity_top_k=6,
         )
 
-        # Create vector retriever
         vector_retriever = VectorIndexRetriever(
             index=self._index,
-            similarity_top_k=5,  # Reduced from 13 since no reranking
+            similarity_top_k=10,
         )
 
-        # Create hybrid retriever
-        hybrid_retriever = HybridRetriever(
+        self._hybrid_retriever = HybridRetriever(
             vector_retriever=vector_retriever,
             bm25_retriever=bm25_retriever,
-            mode="interleave",  # Alternate between vector and BM25 results
+            mode="interleave",
         )
 
-        # # Initialize BGE reranker to get top 5 chunks after hybrid retrieval
-        # logger.info("Initializing BGE reranker (BAAI/bge-reranker-v2-m3)...")
-        # bge_reranker = FlagEmbeddingReranker(
-        #     model="BAAI/bge-reranker-v2-m3",
-        #     top_n=5,
-        #     use_fp16=True,
-        # )
+        self._rankgpt = RankGPTRerank(
+            top_n=5,
+            llm=self.llm_judge,
+            verbose=True,
+        )
 
         # Wrap in CondensePlusContextChatEngine for conversational context
         self._chat_engine = CondensePlusContextChatEngine.from_defaults(
-            retriever=hybrid_retriever,
+            retriever=self._hybrid_retriever,
             memory=self._memory,
             llm=Settings.llm,
             verbose=True,
-            # node_postprocessors=[bge_reranker],  # BGE reranker commented out
+            node_postprocessors=[self._rankgpt],
             system_prompt=(
                 "You are a helpful assistant that answers questions about "
                 "Scottish parliamentary meeting minutes. You MUST answer "
@@ -185,33 +168,46 @@ class ParliamentAgent:
 
         logger.info("ParliamentAgent initialised successfully")
 
+    def get_query_engine(self, response_mode: str = "compact") -> RetrieverQueryEngine:
+        """Return a query engine using the same hybrid retriever + RankGPT reranker."""
+        return RetrieverQueryEngine.from_args(
+            retriever=self._hybrid_retriever,
+            node_postprocessors=[self._rankgpt],
+            response_mode=response_mode,
+        )
+
     def _ingest(self) -> VectorStoreIndex:
-        """Load documents, chunk with keyword extraction, and index into Qdrant."""
+        """Load documents, apply recursive chunking, and index into Qdrant."""
         documents = SimpleDirectoryReader(
             input_dir=str(DATA_DIR),
             filename_as_id=True,
         ).load_data()
         logger.info("Loaded %d documents from %s", len(documents), DATA_DIR)
 
-        Settings.text_splitter = SentenceSplitter(
-            chunk_size=400, chunk_overlap=100
+        # Recursive chunking: tries separators in order [\n\n, \n, " ", ""]
+        node_parser = SentenceSplitter(
+            chunk_size=500,
+            chunk_overlap=120,
+            separator=" ",
+            paragraph_separator="\n\n",
+            secondary_chunking_regex="[^,.;。？！]+[,.;。？！]?",
         )
 
-        pipeline = IngestionPipeline(
-            transformations=[
-                Settings.text_splitter,
-                KeywordExtractor(keywords=10, llm=Settings.llm, num_workers=2),
-                Settings.embed_model,
-            ],
-            vector_store=self._qdrant_manager.vector_store,
+        nodes = node_parser.get_nodes_from_documents(
+            documents, show_progress=True)
+        logger.info(
+            "Created %d nodes with recursive chunking (500/120)", len(nodes))
+
+        storage_context = StorageContext.from_defaults(
+            vector_store=self._qdrant_manager.vector_store
         )
 
-        nodes = pipeline.run(documents=documents, show_progress=True, num_workers=2)
+        index = VectorStoreIndex(
+            nodes,
+            storage_context=storage_context,
+            show_progress=True,
+        )
         logger.info("Ingestion complete – %d nodes indexed", len(nodes))
-
-        index = VectorStoreIndex.from_vector_store(
-            vector_store=self._qdrant_manager.vector_store,
-        )
         return index
 
     async def chat(self, query: str) -> Dict[str, Any]:
@@ -222,7 +218,8 @@ class ParliamentAgent:
             logger.info(f"Total messages in memory: {len(current_memory)}")
             for idx, msg in enumerate(current_memory, 1):
                 content = str(msg.content) if msg.content else ""
-                logger.info(f"  [{idx}] {msg.role.value.upper()}: {content[:150]}...")
+                logger.info(
+                    f"  [{idx}] {msg.role.value.upper()}: {content[:150]}...")
         else:
             logger.info("Memory is empty (first turn in conversation)")
 
@@ -233,9 +230,11 @@ class ParliamentAgent:
 
         logger.info("--- [QUERY REWRITING COMPLETE] ---")
         if not current_memory:
-            logger.info("Note: First query in conversation - likely used as-is")
+            logger.info(
+                "Note: First query in conversation - likely used as-is")
         else:
-            logger.info("Note: Query was contextualized based on conversation history")
+            logger.info(
+                "Note: Query was contextualized based on conversation history")
 
         # LlamaIndex can expose sources via response.source_nodes
         logger.info("--- [RETRIEVAL SCORES] ---")
@@ -243,28 +242,29 @@ class ParliamentAgent:
         content_list = []
         score_list = []
         if hasattr(response, "source_nodes") and response.source_nodes:
-            logger.info(f"Retrieved {len(response.source_nodes)} relevant chunks:")
+            logger.info(
+                f"Retrieved {len(response.source_nodes)} relevant chunks:")
             for idx, n in enumerate(response.source_nodes, 1):
                 score = n.get_score() if hasattr(n, 'get_score') else 0.0
-                content = n.get_content() if hasattr(n, 'get_content') else str(n.node.get_content())
-                fn = n.metadata.get("file_name", "unknown") if hasattr(n, 'metadata') else n.node.metadata.get("file_name", "unknown")
-                kw = n.metadata.get("excerpt_keywords", "") if hasattr(n, 'metadata') else n.node.metadata.get("excerpt_keywords", "")
+                content = n.get_content() if hasattr(
+                    n, 'get_content') else str(n.node.get_content())
+                fn = n.metadata.get("file_name", "unknown") if hasattr(
+                    n, 'metadata') else n.node.metadata.get("file_name", "unknown")
+                kw = n.metadata.get("excerpt_keywords", "") if hasattr(
+                    n, 'metadata') else n.node.metadata.get("excerpt_keywords", "")
 
                 sources.append(f"{fn} (Keywords: {kw})" if kw else fn)
                 content_list.append(content)
                 score_list.append(score)
-                # logger.info(f"  Score: {score:.4f} | Content: {content[:150]}...")
         else:
             logger.info("No source nodes retrieved")
 
         updated_memory = self._memory.get_all()
         logger.info(f"Memory now contains {len(updated_memory)} messages")
 
-        # return {"answer": str(response), "sources": list(set(sources)), "content": content}
         return {"answer": str(response),
                 "content": content_list,
                 "sources": sources}
-
 
     def _retrieve(self, query: str, top_k: int = 8) -> List[Dict[str, Any]]:
         """Retrieve relevant document chunks for a query."""

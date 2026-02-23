@@ -1,9 +1,3 @@
-"""
-Qdrant vector store manager for the Parliamentary Agent.
-
-Handles connection management, collection lifecycle, and provides
-both sync and async Qdrant clients for use with FastAPI.
-"""
 import os
 import logging
 import time
@@ -14,7 +8,7 @@ from llama_index.vector_stores.qdrant import QdrantVectorStore
 
 logger = logging.getLogger(__name__)
 
-PARAMS_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "params.yaml")
+PARAMS_PATH = os.path.join(os.path.dirname(__file__), "..", "params.yaml")
 
 
 def _load_params() -> dict:
@@ -32,8 +26,8 @@ class QdrantVectorStoreManager:
         collection_name: str | None = None,
     ):
         params = _load_params()
-        self.host = host or os.getenv("QDRANT_HOST", "localhost")
-        self.port = port or int(os.getenv("QDRANT_PORT", "6333"))
+        self.host = host or os.getenv("QDRANT_HOST")
+        self.port = port or int(os.getenv("QDRANT_PORT"))
         self.collection_name = collection_name or params["COLLECTION_NAME"]
 
         self._client = self._connect_sync()
@@ -51,7 +45,8 @@ class QdrantVectorStoreManager:
             try:
                 client = QdrantClient(host=self.host, port=self.port)
                 client.get_collections()
-                logger.info("Connected to Qdrant at %s:%s", self.host, self.port)
+                logger.info("Connected to Qdrant at %s:%s",
+                            self.host, self.port)
                 return client
             except Exception:
                 if attempt == max_retries:

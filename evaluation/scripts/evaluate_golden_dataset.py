@@ -46,13 +46,17 @@ class GoldenDatasetEvaluator:
         # Verify OpenAI API key
         self.openai_api_key = os.getenv("OPENAI_API_KEY")
         if not self.openai_api_key:
-            raise ValueError("OPENAI_API_KEY not found in environment variables")
+            raise ValueError(
+                "OPENAI_API_KEY not found in environment variables")
 
         os.environ["OPENAI_API_KEY"] = self.openai_api_key
 
-        logging.info("Initialized GoldenDatasetEvaluator with RAGAS + LlamaIndex")
-        logging.info(f"Using embedding model: {self.params['EMBEDDING_MODEL']}")
-        logging.info(f"Using generation model: {self.params['GENERATION_MODEL']}")
+        logging.info(
+            "Initialized GoldenDatasetEvaluator with RAGAS + LlamaIndex")
+        logging.info(
+            f"Using embedding model: {self.params['EMBEDDING_MODEL']}")
+        logging.info(
+            f"Using generation model: {self.params['GENERATION_MODEL']}")
         logging.info(f"Using judge model: {self.params['JUDGE_MODEL']}")
         logging.info(f"Golden dataset path: {self.golden_dataset_path}")
         logging.info(f"Results path: {self.results_path}")
@@ -104,7 +108,8 @@ class GoldenDatasetEvaluator:
             reference_answer = item["reference_answer"]
             reference_contexts = item["reference_contexts"]
 
-            logging.info(f"Processing query {idx + 1}/{len(golden_data)}: {query[:100]}...")
+            logging.info(
+                f"Processing query {idx + 1}/{len(golden_data)}: {query[:100]}...")
 
             try:
                 # Create SingleTurnSample
@@ -128,7 +133,8 @@ class GoldenDatasetEvaluator:
     def run_evaluation(self):
         """Execute the complete golden dataset evaluation pipeline."""
         logging.info("=" * 80)
-        logging.info("Starting Golden Dataset Evaluation with RAGAS + LlamaIndex")
+        logging.info(
+            "Starting Golden Dataset Evaluation with RAGAS + LlamaIndex")
         logging.info("=" * 80)
 
         # Load golden dataset
@@ -138,9 +144,10 @@ class GoldenDatasetEvaluator:
         logging.info("Initializing ParliamentAgent...")
         agent = ParliamentAgent()
 
-        # Get query engine from agent's index
-        logging.info("Creating query engine from agent index...")
-        query_engine = agent._index.as_query_engine(similarity_top_k=5, response_mode="compact")
+        # Reuse the agent's hybrid retriever + RankGPT reranker
+        logging.info(
+            "Creating query engine from agent (hybrid retriever + RankGPT)...")
+        query_engine = agent.get_query_engine(response_mode="compact")
 
         # Prepare RAGAS dataset
         ragas_dataset = self.prepare_ragas_dataset(golden_data)
@@ -233,7 +240,8 @@ class GoldenDatasetEvaluator:
 
         # Add metric scores from the dataframe
         # Calculate mean scores for each metric column
-        metric_columns = [col for col in results_df.columns if col not in ['user_input', 'retrieved_contexts', 'reference_contexts', 'response', 'reference']]
+        metric_columns = [col for col in results_df.columns if col not in [
+            'user_input', 'retrieved_contexts', 'reference_contexts', 'response', 'reference']]
 
         for metric_name in metric_columns:
             if metric_name in results_df.columns:
@@ -252,7 +260,8 @@ class GoldenDatasetEvaluator:
         print("\nMetric Scores:")
 
         # Calculate mean scores from dataframe
-        metric_columns = [col for col in results_df.columns if col not in ['user_input', 'retrieved_contexts', 'reference_contexts', 'response', 'reference']]
+        metric_columns = [col for col in results_df.columns if col not in [
+            'user_input', 'retrieved_contexts', 'reference_contexts', 'response', 'reference']]
 
         for metric_name in metric_columns:
             if metric_name in results_df.columns:

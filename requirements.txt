@@ -16,20 +16,28 @@ llama-index-llms-gemini
 llama-index-llms-google-genai
 google-generativeai
 
-# LLM provider - OpenAI (for evaluation judge)
+# LLM provider - OpenAI
 llama-index-llms-openai
 openai
 
-# Evaluation framework
-ragas
-
-# Embeddings - HuggingFace
+# Embeddings
 llama-index-embeddings-huggingface
+llama-index-embeddings-openai
 
 # Vector store - Qdrant
 llama-index-vector-stores-qdrant
 qdrant-client
 
+# Retrievers
+llama-index-retrievers-bm25
+
+# Evaluation framework
+ragas
+
 # Utilities
 python-dotenv
 pyyaml
+pandas
+tqdm
+nest-asyncio
+autopep8

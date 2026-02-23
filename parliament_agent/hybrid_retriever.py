@@ -47,9 +47,9 @@ class HybridRetriever(BaseRetriever):
         Returns:
             Combined list of unique nodes from both retrievers
         """
-        logger.info(f"Hybrid retrieval for query: {query_bundle.query_str[:100]}...")
+        logger.info(
+            f"Hybrid retrieval for query: {query_bundle.query_str[:100]}...")
 
-        # Get results from both retrievers
         vector_nodes = self._vector_retriever.retrieve(query_bundle)
         bm25_nodes = self._bm25_retriever.retrieve(query_bundle)
 
@@ -61,7 +61,8 @@ class HybridRetriever(BaseRetriever):
         elif self._mode == "concat":
             return self._concat_results(vector_nodes, bm25_nodes)
         else:
-            raise ValueError(f"Invalid mode: {self._mode}. Use 'interleave' or 'concat'")
+            raise ValueError(
+                f"Invalid mode: {self._mode}. Use 'interleave' or 'concat'")
 
     def _interleave_results(
         self,
@@ -78,14 +79,12 @@ class HybridRetriever(BaseRetriever):
         max_len = max(len(vector_nodes), len(bm25_nodes))
 
         for i in range(max_len):
-            # Add vector node if available
             if i < len(vector_nodes):
                 vector_node = vector_nodes[i]
                 if vector_node.node.node_id not in node_ids_added:
                     resulting_nodes.append(vector_node)
                     node_ids_added.add(vector_node.node.node_id)
 
-            # Add BM25 node if available
             if i < len(bm25_nodes):
                 bm25_node = bm25_nodes[i]
                 if bm25_node.node.node_id not in node_ids_added:
@@ -107,13 +106,11 @@ class HybridRetriever(BaseRetriever):
         resulting_nodes = []
         node_ids_added = set()
 
-        # Add all vector nodes first
         for node in vector_nodes:
             if node.node.node_id not in node_ids_added:
                 resulting_nodes.append(node)
                 node_ids_added.add(node.node.node_id)
 
-        # Add BM25 nodes that aren't duplicates
         for node in bm25_nodes:
             if node.node.node_id not in node_ids_added:
                 resulting_nodes.append(node)

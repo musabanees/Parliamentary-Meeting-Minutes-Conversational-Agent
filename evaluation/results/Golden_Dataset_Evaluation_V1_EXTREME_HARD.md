@@ -7,10 +7,10 @@ Evaluation of Parliamentary RAG system using human-curated golden dataset with R
 - **Generation Model**: gpt-4o-mini
 - **Evaluation Framework**: RAGAS (LlamaIndex Integration)
 - **Judge LLM**: gpt-4.1-mini (OpenAI)
-- **Total Examples**: 28
+- **Total Examples**: 10
 
 ## RAGAS Metrics Summary
 
-- **faithfulness**: 0.8270
-- **context_precision**: 0.7464
-- **context_recall**: 0.9167
+- **faithfulness**: 0.7290
+- **context_precision**: 0.7517
+- **context_recall**: 0.7400

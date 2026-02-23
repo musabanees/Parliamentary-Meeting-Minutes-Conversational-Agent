@@ -10,11 +10,11 @@ def _make_app_with_mock_agent():
     """Create app instance with a mocked ParliamentAgent."""
     mock_agent = MagicMock()
     
-    # Make chat return an awaitable
     async def mock_chat(*args, **kwargs):
         return {
             "answer": "The committee discussed fiscal sustainability.",
             "sources": ["scottish_parliament_report_07_01_25.txt (Speaker: Stephen Boyle)"],
+            "content": ["The Auditor General discussed fiscal sustainability measures..."],
         }
     
     mock_agent.chat = mock_chat
@@ -46,62 +46,46 @@ class TestChatEndpoint:
         client, mock_agent = client_and_agent
         response = client.post(
             "/chat",
-            json={"query": "What topics were discussed?", "history": []},
+            json={"query": "What topics were discussed?"},
         )
         assert response.status_code == 200
         data = response.json()
         assert "response" in data
-        assert "sources" in data
         assert isinstance(data["response"], str)
         assert len(data["response"]) > 0
 
-    def test_chat_with_history(self, client_and_agent):
-        client, mock_agent = client_and_agent
-        response = client.post(
-            "/chat",
-            json={
-                "query": "What did he say next?",
-                "history": [
-                    {"role": "user", "content": "What did Stephen Boyle discuss?"},
-                    {"role": "assistant", "content": "He discussed fiscal sustainability."},
-                ],
-            },
-        )
-        assert response.status_code == 200
-        # Verify response includes expected keys
-        data = response.json()
-        assert "response" in data
-        assert "sources" in data
-
-    def test_chat_without_history(self, client_and_agent):
-        client, mock_agent = client_and_agent
-        response = client.post(
-            "/chat",
-            json={"query": "Who is the Convener?"},
-        )
-        assert response.status_code == 200
-        data = response.json()
-        assert "response" in data
-
-    def test_chat_sources_in_response(self, client_and_agent):
+    def test_chat_returns_sources(self, client_and_agent):
         client, _ = client_and_agent
         response = client.post(
             "/chat",
-            json={"query": "What did Audit Scotland say?", "history": []},
+            json={"query": "What did Audit Scotland say?"},
         )
         data = response.json()
+        assert "sources" in data
         assert data["sources"] is not None
         assert isinstance(data["sources"], list)
+        assert len(data["sources"]) > 0
+
+    def test_chat_returns_content(self, client_and_agent):
+        client, _ = client_and_agent
+        response = client.post(
+            "/chat",
+            json={"query": "What did Audit Scotland say?"},
+        )
+        data = response.json()
+        assert "content" in data
+        assert data["content"] is not None
+        assert isinstance(data["content"], list)
+        assert len(data["content"]) > 0
 
     def test_chat_endpoint_returns_422_on_missing_query(self, client_and_agent):
         client, _ = client_and_agent
-        response = client.post("/chat", json={"history": []})
+        response = client.post("/chat", json={})
         assert response.status_code == 422
 
     def test_chat_endpoint_returns_500_on_agent_error(self, client_and_agent):
         client, mock_agent = client_and_agent
         
-        # Make chat raise an error
         async def mock_chat_error(*args, **kwargs):
             raise RuntimeError("LLM error")
         
@@ -109,7 +93,7 @@ class TestChatEndpoint:
         
         response = client.post(
             "/chat",
-            json={"query": "test query", "history": []},
+            json={"query": "test query"},
         )
         assert response.status_code == 500
 
@@ -117,7 +101,7 @@ class TestChatEndpoint:
         client, _ = client_and_agent
         response = client.post(
             "/chat",
-            json={"query": "What topics were discussed?", "history": []},
+            json={"query": "What topics were discussed?"},
         )
         assert response.status_code != 404
 
